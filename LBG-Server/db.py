@@ -21,7 +21,7 @@ def dropTable(cursor, tableName):
 
 def insertIntoTable(cursor, table, values):
 	values = arrToString(values)
-	print('insert into %s values(%s)'%(table, values))
+	#print('insert into %s values(%s)'%(table, values))
 	cursor.execute('insert into %s values(%s)'%(table, values))
 
 

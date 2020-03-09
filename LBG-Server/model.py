@@ -9,4 +9,11 @@ class User():
 				'role_id': self.role_id}
 		return info
 
+	def addToDB(self):
+		result = []
+		result.append(self.id)
+		result.append(self.login)
+		result.append(self.passw_hash)
+		result.append(self.role_id)
+		return result
 		
