@@ -10,5 +10,11 @@ public class llexmActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
+
+        //TODO спросить у сервера события
+    }
+
+    protected void serverAnswered() {
+        //TODO добавить все пришедшие события в два layout'а, которые будут отображаться попеременно
     }
 }
