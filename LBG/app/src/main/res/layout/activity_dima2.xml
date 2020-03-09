@@ -80,7 +80,7 @@
         android:layout_below="@+id/edit_password"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="94dp"
-        android:onClick="Login"
+        android:onClick="onClickLogin"
         android:text="@string/In" />
 
     <TextView
@@ -103,5 +103,17 @@
         android:layout_alignEnd="@+id/edit_password"
         android:layout_alignLeft="@+id/attempts"
         android:layout_alignStart="@+id/attempts" />
+
+    <TextView
+        android:id="@+id/serverResponse"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/button_Login"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="143dp"
+        android:layout_marginEnd="154dp"
+        android:layout_marginBottom="214dp"
+        android:text="TextView" />
 
 </RelativeLayout>

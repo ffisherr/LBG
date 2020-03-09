@@ -16,11 +16,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        // TODO: Go to login activity
-        // вот отсюда должна вызываться твоя активность
-        // добавляй в проект активности, сейчас покажу как
         Intent intent = new Intent(MainActivity.this, Dima.class);
-        startActivity(intent);finish();
+        startActivity(intent);
     }
 
     public void onClickChat(View view) {
