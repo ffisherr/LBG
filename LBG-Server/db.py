@@ -9,7 +9,6 @@ def arrToString(arr):
 	return s[:-2]
 
 def createTable(cursor, tableName, cols):
-	#cols = arrToString(cols)
 	sql = 'create table %s (%s)' % (tableName, cols)
 	print(sql)
 	cursor.execute(sql)
