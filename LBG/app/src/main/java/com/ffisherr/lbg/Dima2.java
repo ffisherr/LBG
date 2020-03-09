@@ -5,10 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutionException;
 
 public class Dima2 extends AppCompatActivity {
 
@@ -24,16 +26,29 @@ public class Dima2 extends AppCompatActivity {
         String userLogin = editTextLogin.toString();
         TextView serverResponse = findViewById(R.id.serverResponse);
         serverResponse.setText(userLogin);
-        new taskServer().execute("https://www.vogella.com/index.html");
+        String p, result;
+        TaskServer ts = new TaskServer();
+        ts.execute("http://192.168.1.156:5002/users/1");
+        if (ts == null)
+            return;
+        try {
+            result = ts.get();
+            Toast.makeText(this, "Полученный результат: " + result, Toast.LENGTH_LONG)
+                    .show();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
     }
 
-    private class taskServer extends AsyncTask<String, Void, String>{
+    private class TaskServer extends AsyncTask<String, Void, String>{
         @Override
-        protected String doInBackground(String... param) {
+        protected String doInBackground(String... urls) {
             ServerDescriptor serverDescriptor = new ServerDescriptor();
             String sResponse = "";
             try {
-                sResponse = serverDescriptor.doGetRequest("https://www.vogella.com/index.html");//"http://192.168.1.156:5002/users/1");
+                sResponse = serverDescriptor.doGetRequest(urls[0]);
             } catch (IOException ex) {
                 sResponse = "Нет соединения с сервером";
             }
