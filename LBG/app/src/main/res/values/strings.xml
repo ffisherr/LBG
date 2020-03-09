@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">LBG</string>
+    <string name="In">Войти</string>
+    <string name="Reg">Зарегистрироваться</string>
+    <string name="Log">Введите login</string>
+    <string name="Pas">Введите пароль</string>
+    <string name="PasReplay">Повторите пароль:</string>
+    <string name="PasReplay2">Повторите пароль</string>
 </resources>
