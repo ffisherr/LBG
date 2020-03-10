@@ -30,7 +30,8 @@ class Event():
 				'title': self.title,
 				'dt': self.dt,
 				'about': self.about,
-				'tags': json.loads(self.tags)["tags"]}
+				'tags': json.loads(self.tags)["tags"],
+				'status': 'success'}
 		return info
 
 	def addToDB(self):
