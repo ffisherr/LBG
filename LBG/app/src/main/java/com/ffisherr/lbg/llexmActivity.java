@@ -17,7 +17,7 @@ import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
     LinearLayout calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
-    EventPesronse myEvent;
+    EventPesronse [] myEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +63,10 @@ public class llexmActivity extends AppCompatActivity {
         ts.execute(url, event_data);
         try {
             result = ts.get();
-            EventPesronse ev = g.fromJson(result, EventPesronse.class);
-            if (ev.getStatus().equals(ServerDescriptor.SUCCESS)) {
+            EventPesronse[] ev = g.fromJson(result, EventPesronse[].class);
+            if (ev[0].getStatus().equals(ServerDescriptor.SUCCESS)) {
                 myEvent = ev;
-            } else if (ev.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
+            } else if (ev[0].getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
                 Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
             } else {
                 Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show();
