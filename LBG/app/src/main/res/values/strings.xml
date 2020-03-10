@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">LBG</string>
+
+    <string name="In">Войти</string>
+    <string name="autorization_text">Авторизация</string>
+
+    <!-- Регистрация начало -->
+    <string name="surname_text">Фамилия:</string>
+    <string name="surname_hint">Петров</string>
+
+    <string name="firstName_text">Имя:</string>
+    <string name="firstName_hint">Алексей</string>
+
+    <string name="secondName_text">Отчество:</string>
+    <string name="secondName_hint">Сергеевич(необязательно)</string>
+
+    <string name="login_text">Login:</string>
+    <string name="login_hint">Введите login</string>
+
+    <string name="passw_text">Пароль:</string>
+    <string name="passw_hint">Введите пароль</string>
+
+    <string name="repeatPassw_text">Подтвердить пароль:</string>
+    <string name="repeatPassw_hint">Повторите пароль</string>
+
+    <string name="register_btn_text">Зарегистрироваться</string>
+    <!-- Регистрация конец -->
+
+    <!-- Вход начало -->
+    <string name="attemptsNumber_text">Попыток:</string>
+    <!-- Вход конец -->
 </resources>
