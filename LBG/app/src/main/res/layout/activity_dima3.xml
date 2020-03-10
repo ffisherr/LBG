@@ -87,7 +87,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Log"
+                android:hint="@string/login_hint"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -101,8 +101,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Pas"
-                android:inputType="textPersonName" />
+                android:hint="@string/passw_hint"
+                android:inputType="text|textPassword" />
 
             <TextView
                 android:id="@+id/Pas2"
@@ -115,8 +115,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/PasReplay2"
-                android:inputType="textPersonName" />
+                android:hint="@string/repeatPassw_hint"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/Reg2"
