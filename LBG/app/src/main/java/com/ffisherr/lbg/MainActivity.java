@@ -2,8 +2,10 @@ package com.ffisherr.lbg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -14,7 +16,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        // TODO: Go to login activity
+        Intent intent = new Intent(MainActivity.this, Dima.class);
+        startActivity(intent);
     }
 
     public void onClickChat(View view) {

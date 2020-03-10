@@ -8,16 +8,18 @@
     tools:context=".MainActivity">
 
     <Button
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/login"
-        android:onClick="onClickLogin" />
+        android:onClick="onClickLogin"
+        android:text="Авторизация/Регистрация" />
 
     <Button
+        android:id="@+id/chat"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/chat"
-        android:onClick="onClickChat" />
+        android:onClick="onClickChat"
+        android:text="чат" />
 
     <Button
         android:layout_width="match_parent"

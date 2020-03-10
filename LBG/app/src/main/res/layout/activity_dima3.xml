@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/container1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="bottom|center_vertical"
+        android:orientation="horizontal">
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/Passw0rd"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="vertical">
+            <!--Фамилия-->
+            <TextView
+                android:id="@+id/Surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/surname_text" />
+
+            <EditText
+                android:id="@+id/edit_Surname"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/surname_hint"
+                android:inputType="textPersonName" />
+
+            <!--Имя-->
+
+            <TextView
+                android:id="@+id/FirstName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/firstName_text" />
+
+            <EditText
+                android:id="@+id/First_Name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/firstName_hint"
+                android:inputType="textPersonName" />
+
+            <!--Отчество-->
+
+            <TextView
+                android:id="@+id/SecondName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/secondName_text" />
+
+            <EditText
+                android:id="@+id/edit_SecondName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/secondName_hint"
+                android:inputType="textPersonName" />
+
+            <!--Login-->
+
+            <TextView
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/login_text" />
+
+            <EditText
+                android:id="@+id/edit_login"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/login_hint"
+                android:inputType="textPersonName" />
+
+            <!--Пароль-->
+
+            <TextView
+                android:id="@+id/Passw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/passw_text" />
+
+            <EditText
+                android:id="@+id/Password"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/passw_hint"
+                android:inputType="textPassword" />
+
+            <TextView
+                android:id="@+id/Pas2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/repeatPassw_text" />
+
+            <EditText
+                android:id="@+id/edit_repeatPassw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="@string/repeatPassw_hint"
+                android:inputType="textPassword" />
+
+            <Button
+                android:id="@+id/Reg2"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_weight="1"
+                android:text="@string/register_btn_text" />
+        </LinearLayout>
+    </ScrollView>
+
+
+</RelativeLayout>
