@@ -1,5 +1,6 @@
 package com.ffisherr.lbg;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
@@ -51,11 +52,14 @@ public class Dima2 extends AppCompatActivity {
                 ed.putString(LOGIN_TEXT, ur.getLogin());
                 ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                 ed.putBoolean(IS_KNOWN_BOOL, true);
-                ed.commit();
+                ed.apply();
             } else if (ur.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
-                unSuccess.setText("Не удается получить доступ к серверу");
+
+                Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
+                //unSuccess.setText("Не удается получить доступ к серверу");
             } else {
-                unSuccess.setText("Не удается получить доступ к серверу");
+                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show();
+                //unSuccess.setText("Не удается получить доступ к серверу");
             }
         } catch (InterruptedException e) {
             unSuccess.setText("error");
