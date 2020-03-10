@@ -34,13 +34,13 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:id="@+id/Familiya"
+                android:id="@+id/SurName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/surname_text" />
 
             <EditText
-                android:id="@+id/Familiya_"
+                android:id="@+id/edit_surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -54,7 +54,7 @@
                 android:text="@string/firstName_text" />
 
             <EditText
-                android:id="@+id/First_Name"
+                android:id="@+id/edit_FirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -68,7 +68,7 @@
                 android:text="@string/secondName_text" />
 
             <EditText
-                android:id="@+id/Second_Name"
+                android:id="@+id/edit_SecondName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -82,7 +82,7 @@
                 android:text="@string/login_text" />
 
             <EditText
-                android:id="@+id/login"
+                android:id="@+id/edit_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -110,7 +110,7 @@
                 android:text="Повторите пароль" />
 
             <EditText
-                android:id="@+id/Passw0rd2"
+                android:id="@+id/edit_repeatPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

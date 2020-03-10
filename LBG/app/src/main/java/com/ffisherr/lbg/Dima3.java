@@ -45,7 +45,7 @@ public class Dima3 extends AppCompatActivity {
         UserResponse user = new UserResponse();
 
         EditText editText = findViewById(R.id.edit_password_reg);
-        EditText repeatPassword = findViewById(R.id.edit_repeatPassw);
+        EditText repeatPassword = findViewById(R.id.edit_repeatPassword);
 
         TextView infText = findViewById(R.id.info);
 
@@ -53,7 +53,11 @@ public class Dima3 extends AppCompatActivity {
         String p2 = repeatPassword.getText().toString();
 
         if (p1.equals(p2)) {
-            editText = findViewById(R.id.edit_Surname);
+
+            editText = findViewById(R.id.edit_FirstName);
+            user.setFirstName(editText.getText().toString());
+
+            editText = findViewById(R.id.edit_surname);
             user.setSurName(editText.getText().toString());
 
             editText = findViewById(R.id.edit_SecondName);
