@@ -90,9 +90,10 @@ class EventByTags(Resource):
 							break
 					if z == True:
 						break
-			return jsonify({'status':'success', 'info':events})
+			print(events)
+			return jsonify(events)
 		except:
-			return {'status': 'error'}
+			return [{'status': 'error'}]
 
 
 api.add_resource(UserById,    '/users/<user_id>')

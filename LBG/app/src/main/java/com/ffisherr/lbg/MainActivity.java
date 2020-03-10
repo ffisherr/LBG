@@ -39,20 +39,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickChat(View view) {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(LOGIN_TEXT, "");
-        ed.putString(ROLE_TEXT, "");
-        ed.putBoolean(IS_KNOWN_BOOL, false);
-        ed.apply();
+
     }
 
     public void onClickSmthElse(View view) {
-        sPref = getPreferences(MODE_PRIVATE);
-        SharedPreferences.Editor ed = sPref.edit();
-        ed.putString(LOGIN_TEXT, "testUser");
-        ed.putString(ROLE_TEXT, "1");
-        ed.putBoolean(IS_KNOWN_BOOL, true);
-        ed.apply();
+        Intent intent = new Intent(MainActivity.this, llexmActivity.class);
+        startActivity(intent);
     }
 }
