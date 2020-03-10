@@ -16,7 +16,7 @@ import com.google.gson.Gson;
 import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
-    LinearLayout calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
+    LinearLayout calendar_layout;// = (LinearLayout) findViewById(R.id.calendar_layout);
     EventPesronse [] myEvents;
 
     @Override
@@ -28,6 +28,9 @@ public class llexmActivity extends AppCompatActivity {
         getEvents(tags);
         if (myEvents != null) {
             // TODO значит что-то пришло
+            for (EventPesronse event : myEvents) {
+                System.out.println(event.getTitle());
+            }
         }
         //TODO спросить у сервера события
     }
