@@ -4,6 +4,7 @@ package com.ffisherr.lbg;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,7 +19,7 @@ public class Dima3 extends AppCompatActivity {
         setContentView(R.layout.activity_dima3);
 
         // находим список
-        ListView University = (ListView) findViewById(R.id.University);
+        Spinner University = (Spinner) findViewById(R.id.University);
 
         // создаем адаптер
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
