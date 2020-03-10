@@ -1,5 +1,6 @@
 package com.ffisherr.lbg;
 
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,10 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 
 public class Dima2 extends AppCompatActivity {
+
+    private final String ROLE_TEXT     = "role_text";
+    private final String LOGIN_TEXT    = "login_text";
+    private final String IS_KNOWN_BOOL = "is_known_bool";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +46,12 @@ public class Dima2 extends AppCompatActivity {
             if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                 unSuccess.setText("");
                 Toast.makeText(this, "Вы вошли", Toast.LENGTH_LONG).show();
+                SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putString(LOGIN_TEXT, ur.getLogin());
+                ed.putString(ROLE_TEXT, ur.getRole_id().toString());
+                ed.putBoolean(IS_KNOWN_BOOL, true);
+                ed.commit();
             } else if (ur.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
                 unSuccess.setText("Не удается получить доступ к серверу");
             } else {

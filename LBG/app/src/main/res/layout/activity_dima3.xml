@@ -38,49 +38,49 @@
                 android:id="@+id/Familiya"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Фамилия" />
+                android:text="@string/surname_text" />
 
             <EditText
                 android:id="@+id/Familiya_"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Петров"
+                android:hint="@string/surname_hint"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/FirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Имя" />
+                android:text="@string/firstName_text" />
 
             <EditText
                 android:id="@+id/First_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Алексей"
+                android:hint="@string/firstName_hint"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/SecondName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Отчество" />
+                android:text="@string/secondName_text" />
 
             <EditText
                 android:id="@+id/Second_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Сергеевич(необязательно)"
+                android:hint="@string/secondName_hint"
                 android:inputType="textPersonName" />
 
             <TextView
                 android:id="@+id/Male"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Адресс электронной почты" />
+                android:text="@string/login_text" />
 
             <EditText
                 android:id="@+id/login"
@@ -91,17 +91,17 @@
                 android:inputType="textPersonName" />
 
             <TextView
-                android:id="@+id/Parol"
+                android:id="@+id/passw_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Пароль" />
+                android:text="@string/passw_text" />
 
             <EditText
                 android:id="@+id/edit_password_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Pas"
+                android:hint="@string/"
                 android:inputType="textPersonName" />
 
             <TextView
