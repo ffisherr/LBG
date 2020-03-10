@@ -13,6 +13,8 @@ public class ServerDescriptor {
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
+    public static final String serverIpAdress = "http://192.168.1.156:5002";
+
     public ServerDescriptor() {
         client = new OkHttpClient();
     }

@@ -21,20 +21,18 @@ public class Dima2 extends AppCompatActivity {
     }
 
     public void onClickLogin(View view) {
-        System.out.println("Entered");
         EditText editTextLogin = findViewById(R.id.edit_user);
         String userLogin = editTextLogin.toString();
-        TextView serverResponse = findViewById(R.id.serverResponse);
-        serverResponse.setText(userLogin);
-        String p, result;
-        TaskServer ts = new TaskServer();
-        ts.execute("http://192.168.1.156:5002/users/1");
-        if (ts == null)
-            return;
+        String result;
+        TaskGetServer ts = new TaskGetServer();
+        String url = ServerDescriptor.serverIpAdress + "/get_user_by_login/" + userLogin;
+        ts.execute(url);
         try {
             result = ts.get();
             Toast.makeText(this, "Полученный результат: " + result, Toast.LENGTH_LONG)
                     .show();
+            // TODO Convert response from json to smth good
+            //  Check server answer
         } catch (InterruptedException e) {
             e.printStackTrace();
         } catch (ExecutionException e) {
@@ -42,7 +40,7 @@ public class Dima2 extends AppCompatActivity {
         }
     }
 
-    private class TaskServer extends AsyncTask<String, Void, String>{
+    private class TaskGetServer extends AsyncTask<String, Void, String>{
         @Override
         protected String doInBackground(String... urls) {
             ServerDescriptor serverDescriptor = new ServerDescriptor();
@@ -58,6 +56,26 @@ public class Dima2 extends AppCompatActivity {
         @Override
         protected void onPostExecute(String result) {
             System.out.println("Finished!!!");
+            System.out.println(result);
+            super.onPostExecute(result);
+        }
+    }
+
+    private class TaskPostServer extends AsyncTask<String, Void, String>{
+        @Override
+        protected String doInBackground(String... urls) {
+            ServerDescriptor serverDescriptor = new ServerDescriptor();
+            String sResponse;
+            try {
+                sResponse = serverDescriptor.doPostRequest(urls[0], urls[1]);
+            } catch (IOException ex) {
+                sResponse = "Нет соединения с сервером";
+            }
+            System.out.println(sResponse);
+            return sResponse;
+        }
+        @Override
+        protected void onPostExecute(String result) {
             System.out.println(result);
             super.onPostExecute(result);
         }

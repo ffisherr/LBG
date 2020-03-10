@@ -15,18 +15,18 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
-        android:text="Авторизация"
+        android:text="@string/autorization_text"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
     <TextView
         android:id="@+id/user_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
         android:layout_below="@+id/Login"
         android:layout_marginTop="75dp"
-        android:layout_marginLeft="10dp"
-        android:text="Пользователь:"
+        android:layout_marginStart="10dp"
+        android:text="@string/login_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
@@ -34,9 +34,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/user_text"
-        android:layout_marginLeft="35dp"
-        android:layout_toRightOf="@+id/user_text"
-        android:hint="@string/Log">
+        android:layout_marginStart="35dp"
+        android:layout_toEndOf="@+id/user_text"
+        android:hint="@string/login_hint">
 
         <requestFocus />
     </EditText>
@@ -45,31 +45,31 @@
         android:id="@+id/password_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/user_text"
+        android:layout_alignStart="@+id/user_text"
         android:layout_below="@+id/user_text"
         android:layout_marginTop="40dp"
-        android:text="Пароль:"
+        android:text="@string/passw_text"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
     <EditText
         android:id="@+id/edit_password"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/edit_user"
-        android:layout_alignRight="@+id/edit_user"
+        android:layout_alignStart="@+id/edit_user"
+        android:layout_alignEnd="@+id/edit_user"
         android:layout_alignBottom="@+id/password_text"
-        android:hint="@string/Pas"
+        android:hint="@string/passw_hint"
         android:inputType="textPassword" />
 
     <TextView
         android:id="@+id/attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/password_text"
+        android:layout_alignStart="@+id/password_text"
         android:layout_below="@+id/password_text"
-        android:layout_marginLeft="30dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="48dp"
-        android:text="Попыток:"
+        android:text="@string/attemptsNumber_text"
         android:visibility="invisible"
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
@@ -87,7 +87,7 @@
         android:id="@+id/number_of_attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/user_text"
+        android:layout_alignEnd="@+id/user_text"
         android:layout_alignTop="@+id/attempts"
         android:visibility="invisible" />
 
@@ -99,21 +99,7 @@
         android:visibility="invisible"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="57dp"
-        android:layout_alignRight="@+id/edit_password"
         android:layout_alignEnd="@+id/edit_password"
-        android:layout_alignLeft="@+id/attempts"
         android:layout_alignStart="@+id/attempts" />
-
-    <TextView
-        android:id="@+id/serverResponse"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/button_Login"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="143dp"
-        android:layout_marginEnd="154dp"
-        android:layout_marginBottom="214dp"
-        android:text="TextView" />
 
 </RelativeLayout>

@@ -22,97 +22,105 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:orientation="vertical">
-
+            <!--Фамилия-->
             <TextView
-                android:id="@+id/Familiya"
+                android:id="@+id/Surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Фамилия" />
+                android:text="@string/surname_text" />
 
             <EditText
-                android:id="@+id/Familiya_"
+                android:id="@+id/edit_Surname"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Петров"
+                android:hint="@string/surname_hint"
                 android:inputType="textPersonName" />
+
+            <!--Имя-->
 
             <TextView
                 android:id="@+id/FirstName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Имя" />
+                android:text="@string/firstName_text" />
 
             <EditText
                 android:id="@+id/First_Name"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Алексей"
+                android:hint="@string/firstName_hint"
                 android:inputType="textPersonName" />
+
+            <!--Отчество-->
 
             <TextView
                 android:id="@+id/SecondName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Отчество" />
+                android:text="@string/secondName_text" />
 
             <EditText
-                android:id="@+id/Second_Name"
+                android:id="@+id/edit_SecondName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="Сергеевич(необязательно)"
+                android:hint="@string/secondName_hint"
                 android:inputType="textPersonName" />
 
-            <TextView
-                android:id="@+id/Male"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Адресс электронной почты" />
+            <!--Login-->
 
-            <EditText
+            <TextView
                 android:id="@+id/login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:hint="@string/Log"
-                android:inputType="textPersonName" />
+                android:text="@string/login_text" />
 
-            <TextView
-                android:id="@+id/Parol"
+            <EditText
+                android:id="@+id/edit_login"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Пароль" />
+                android:ems="10"
+                android:hint="@string/login_hint"
+                android:inputType="textPersonName" />
+
+            <!--Пароль-->
+
+            <TextView
+                android:id="@+id/Passw"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/passw_text" />
 
             <EditText
                 android:id="@+id/Password"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Pas"
-                android:inputType="textPersonName" />
+                android:hint="@string/passw_hint"
+                android:inputType="textPassword" />
 
             <TextView
                 android:id="@+id/Pas2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Повторите пароль" />
+                android:text="@string/repeatPassw_text" />
 
             <EditText
-                android:id="@+id/Passw0rd2"
+                android:id="@+id/edit_repeatPassw"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/PasReplay2"
-                android:inputType="textPersonName" />
+                android:hint="@string/repeatPassw_hint"
+                android:inputType="textPassword" />
 
             <Button
                 android:id="@+id/Reg2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_weight="1"
-                android:text="@string/Reg" />
+                android:text="@string/register_btn_text" />
         </LinearLayout>
     </ScrollView>
 
