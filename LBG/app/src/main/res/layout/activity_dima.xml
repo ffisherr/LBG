@@ -32,7 +32,7 @@
                 android:id="@+id/Reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/Reg" />
+                android:text="@string/register_btn_text" />
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>
