@@ -17,7 +17,7 @@ class UserAdd(Resource):
 			cursor     = conn.cursor()
 			Login      = request.json['login']
 			Passw_hash = request.json['passw_hash']
-			Role_id    = request.json['role_id']
+			Role_id    = request.json['Role_id']
 
 			alikeUs = cursor.execute('select count(*) from users \
 			where login="%s"'%Login)
@@ -36,7 +36,7 @@ class UserAdd(Resource):
 			conn.commit()
 			return {'status':'success'}			
 		except Exception as e:
-			return {'status':'error'}
+			return {'status':'loginError'}
 
 
 class UserById(Resource):
@@ -49,8 +49,26 @@ class UserById(Resource):
 		return jsonify(result.getFullInfo())
 
 
-api.add_resource(UserById, '/users/<user_id>')
-api.add_resource(UserAdd,  '/user_add')
+class UserByLogin(Resource):
+	def post(self):
+		try:
+			conn = sqlite3.connect('lbg.db')
+			cursor = conn.cursor()
+			print(request.json)
+			passw_hash = request.json['passw_hash']
+			user_login = request.json['login']
+			user = cursor.execute('select * from users where login="%s" and passw_hash="%s"'
+				%(user_login, passw_hash))
+			for u in user:
+				result = User(u)
+			return jsonify({'status':'success', 'info':result.getFullInfo()})
+		except:
+			return {'status': 'error'}
+
+
+api.add_resource(UserById,    '/users/<user_id>')
+api.add_resource(UserByLogin, '/get_user_by_login')
+api.add_resource(UserAdd,     '/user_add')
 
 
 if __name__ == '__main__':

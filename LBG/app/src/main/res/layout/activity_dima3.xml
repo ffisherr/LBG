@@ -97,7 +97,7 @@
                 android:text="Пароль" />
 
             <EditText
-                android:id="@+id/Password"
+                android:id="@+id/edit_password_reg"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -115,15 +115,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/PasReplay2"
-                android:inputType="textPersonName" />
+
+                android:hint="@string/repeatPassw_hint"
+                android:inputType="textPassword" />
+            
+          <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/info" />
 
             <Button
                 android:id="@+id/Reg2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/Reg" />
+                android:onClick="onClickRegister"
+                android:text="@string/register_btn_text" />
         </LinearLayout>
     </ScrollView>
 

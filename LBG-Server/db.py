@@ -9,7 +9,7 @@ def arrToString(arr):
 	return s[:-2]
 
 def createTable(cursor, tableName, cols):
-	sql = 'create table %s (%s)' % (tableName, cols)
+	sql = 'create table if not exists %s (%s)' % (tableName, cols)
 	print(sql)
 	cursor.execute(sql)
 
@@ -21,7 +21,7 @@ def dropTable(cursor, tableName):
 
 def insertIntoTable(cursor, table, values):
 	values = arrToString(values)
-	#print('insert into %s values(%s)'%(table, values))
+	print('insert into %s values(%s)'%(table, values))
 	cursor.execute('insert into %s values(%s)'%(table, values))
 
 
@@ -50,7 +50,7 @@ def createTables(cursor):
 def main():
 	conn  = sqlite3.connect('lbg.db')
 	cursor = conn.cursor()
-	dropTables(cursor)
+	#dropTables(cursor)
 	createTables(cursor)
 	conn.commit()
 	
