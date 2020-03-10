@@ -7,7 +7,7 @@
     <!-- Регистрация начало -->
     <string name="surname_text">Фамилия:</string>
     <string name="surname_hint">Петров</string>
-
+    <string name="Reg">Зарегестрироваться</string>
     <string name="firstName_text">Имя:</string>
     <string name="firstName_hint">Алексей</string>
 

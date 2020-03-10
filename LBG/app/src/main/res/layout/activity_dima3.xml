@@ -9,7 +9,6 @@
         android:layout_height="match_parent"
         android:gravity="bottom|center_vertical"
         android:orientation="horizontal">
-
     </LinearLayout>
 
     <ScrollView
@@ -29,9 +28,9 @@
                 android:layout_height="wrap_content"
                 android:text="Выбирите ВУЗ" />
 
-            <ListView
+            <Spinner
                 android:id="@+id/University"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <TextView
@@ -87,7 +86,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Log"
+                android:hint="@string/login_hint"
                 android:inputType="textPersonName" />
 
             <TextView
@@ -101,8 +100,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-                android:hint="@string/Pas"
-                android:inputType="textPersonName" />
+                android:hint="@string/passw_hint"
+                android:inputType="text|textPassword" />
 
             <TextView
                 android:id="@+id/Pas2"
@@ -115,7 +114,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
-
                 android:hint="@string/repeatPassw_hint"
                 android:inputType="textPassword" />
             
