@@ -3,20 +3,30 @@ package com.ffisherr.lbg;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
     LinearLayout calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
+    EventPesronse myEvent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
-
+        getEvent();
+        if (myEvent != null) {
+            // TODO значит что-то пришло
+        }
         //TODO спросить у сервера события
     }
 
@@ -39,4 +49,35 @@ public class llexmActivity extends AppCompatActivity {
         newLayout.addView(newButton);
 
     }
+
+
+    public void getEvent() {
+        String result;
+        TaskPostServer ts = new TaskPostServer();
+        String url = ServerDescriptor.serverIpAdress + "/get_user_by_login";
+
+        String [] tags = {"public"};
+        EventPesronse event = new EventPesronse(tags);
+        Gson g = new Gson();
+        String event_data = g.toJson(event);
+        ts.execute(url, event_data);
+        try {
+            result = ts.get();
+            EventPesronse ev = g.fromJson(result, EventPesronse.class);
+            if (ev.getStatus().equals(ServerDescriptor.SUCCESS)) {
+                myEvent = ev;
+            } else if (ev.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
+                Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
+            } else {
+                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 }
