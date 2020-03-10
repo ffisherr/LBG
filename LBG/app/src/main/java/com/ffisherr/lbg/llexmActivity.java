@@ -17,14 +17,16 @@ import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
     LinearLayout calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
-    EventPesronse [] myEvent;
+    EventPesronse [] myEvents;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
-        getEvent();
-        if (myEvent != null) {
+
+        String [] tags = {"public"};
+        getEvents(tags);
+        if (myEvents != null) {
             // TODO значит что-то пришло
         }
         //TODO спросить у сервера события
@@ -51,12 +53,11 @@ public class llexmActivity extends AppCompatActivity {
     }
 
 
-    public void getEvent() {
+    public void getEvents(String [] tags) {
         String result;
         TaskPostServer ts = new TaskPostServer();
-        String url = ServerDescriptor.serverIpAdress + "/get_user_by_login";
+        String url = ServerDescriptor.serverIpAdress + "/get_event_by_tags";
 
-        String [] tags = {"public"};
         EventPesronse event = new EventPesronse(tags);
         Gson g = new Gson();
         String event_data = g.toJson(event);
@@ -65,7 +66,7 @@ public class llexmActivity extends AppCompatActivity {
             result = ts.get();
             EventPesronse[] ev = g.fromJson(result, EventPesronse[].class);
             if (ev[0].getStatus().equals(ServerDescriptor.SUCCESS)) {
-                myEvent = ev;
+                myEvents = ev;
             } else if (ev[0].getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
                 Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
             } else {
