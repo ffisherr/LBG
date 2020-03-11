@@ -19,7 +19,7 @@ import com.google.gson.Gson;
 import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
-    ScrollView calendar_layout;// = (LinearLayout) findViewById(R.id.calendar_layout);
+    LinearLayout calendar_layout;// = (LinearLayout) findViewById(R.id.calendar_layout);
     EventPesronse [] myEvents;
 
     @Override
@@ -27,9 +27,9 @@ public class llexmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
 
-        calendar_layout = (ScrollView) findViewById(R.id.calendar_layout);
+        calendar_layout = findViewById(R.id.calendar_layout);
 
-        String [] tags = {"public"}; //TODO это мы спрашиваем по тегу паблик?
+        String [] tags = {"tag1", "tag3"}; //TODO это мы спрашиваем по тегу паблик?
         getEvents(tags); //спросить у сервера события
         if (myEvents != null) {
             //значит что-то пришло
