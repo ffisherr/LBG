@@ -10,19 +10,20 @@ import android.widget.TableRow;
 
 public class crestici extends AppCompatActivity {
     Button[][] fields = new Button[3][3];
-    TableLayout Table1 = (TableLayout)findViewById(R.id.Table1);
+    TableLayout Table1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_crestici);
+        Table1 = (TableLayout)findViewById(R.id.Table1);
         buildGame();
 
 
     }
     private void buildGame(){
-        for (int i =0; i < 3; ++i) {
+        for (int i =0; i < 3; i++) {
             TableRow row =new TableRow(this);
-            for (int j =0; i < 3; ++j) {
+            for (int j =0; j < 3; ++j) {
                 final Button button = new Button (this);
                 fields[i][j]=button;
                 row.addView(button,new TableRow.LayoutParams(TableRow.LayoutParams.WRAP_CONTENT, TableRow.LayoutParams.WRAP_CONTENT));
@@ -40,7 +41,7 @@ public class crestici extends AppCompatActivity {
     }
       private void moveA1() {
           for (int i = 0; i < 3; ++i) {
-              for (int j =0; i < 3; ++j){
+              for (int j =0; j < 3; ++j){
                   if(fields[i][j].getText() != "X" && fields[i][j].getText() != "0"){
                       fields[i][j].setText("0");
                       fields[i][j].setClickable(false);
@@ -55,7 +56,7 @@ public class crestici extends AppCompatActivity {
       }
       private void refresh() {
           for (int i = 0; i < 3; ++i) {
-              for (int j = 0; i < 3; ++j) {
+              for (int j = 0; j < 3; ++j) {
                 fields[i][j].setText("");
                 fields[i][j].setClickable(true);
               }
