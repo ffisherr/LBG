@@ -4,17 +4,21 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
+
+import com.google.android.material.tabs.TabLayout;
+
 
 public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sPref;
+
 
     public static final String PREFERENCE_NAME = "my_settings";
     public static final String ROLE_TEXT       = "role_text";
@@ -26,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+       /* sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        SharedPreferences.Editor ed = sPref.edit();
+        ed.putString(LOGIN_TEXT, "");
+        ed.putString(ROLE_TEXT, "");
+        ed.putBoolean(IS_KNOWN_BOOL, false);
+        ed.commit();*/
+
+
+        Intent i = new Intent(MainActivity.this, ChatActivity.class);
+        startActivity(i);
         sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         String  uLogin  = sPref.getString(LOGIN_TEXT    , "");
         String  uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
@@ -34,22 +48,13 @@ public class MainActivity extends AppCompatActivity {
         if (isKnown.equals(false)) {
             Intent intent = new Intent(MainActivity.this, Dima.class);
             startActivity(intent);
+        } else {
+            SectionPagerAdapter spa = new SectionPagerAdapter(getSupportFragmentManager());
+            ViewPager viewPager = findViewById(R.id.pager);
+            viewPager.setAdapter(spa);
+            TabLayout tabLayout = findViewById(R.id.tabs);
+            tabLayout.setupWithViewPager(viewPager);
         }
-    }
-
-    public void onClickLogin(View view) {
-        Intent intent = new Intent(MainActivity.this, Dima.class);
-        startActivity(intent);
-    }
-
-    public void onClickChat(View view) {
-        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
-        startActivity(intent);
-    }
-
-    public void onClickSmthElse(View view) {
-        Intent intent = new Intent(MainActivity.this, llexmActivity.class);
-        startActivity(intent);
     }
 
     private class SectionPagerAdapter extends FragmentPagerAdapter {
@@ -65,9 +70,21 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public Fragment getItem(int position) {
             switch (position) {
+                case 0:
+                    return new CalendarFragment();
                 case 1:
+                    return new ChatFragment();
+            }
+            return new CalendarFragment();
+        }
 
-
+        @Override
+        public CharSequence getPageTitle(int position){
+            switch (position){
+                case 0:
+                    return getResources().getText(R.string.calendar_tab);
+                case 1:
+                    return getResources().getText(R.string.chat_tab);
             }
             return null;
         }

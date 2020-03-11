@@ -1,5 +1,7 @@
 package com.ffisherr.lbg;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -55,7 +57,14 @@ public class Dima2 extends AppCompatActivity {
                 ed.putString(LOGIN_TEXT, ur.getLogin());
                 ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                 ed.putBoolean(IS_KNOWN_BOOL, true);
-                ed.apply();
+                ed.commit();
+                Intent mStartActivity = new Intent(Dima2.this, MainActivity.class);
+                int mPendingIntentId = 123456;
+                PendingIntent mPendingIntent = PendingIntent.getActivity(Dima2.this, mPendingIntentId, mStartActivity,
+                        PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager mgr = (AlarmManager) Dima2.this.getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                System.exit(0);
             } else if (ur.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
 
                 Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();

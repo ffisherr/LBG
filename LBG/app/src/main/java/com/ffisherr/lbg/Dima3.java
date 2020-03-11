@@ -1,7 +1,10 @@
 package com.ffisherr.lbg;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -96,8 +99,16 @@ public class Dima3 extends AppCompatActivity {
                     ed.putString(LOGIN_TEXT, ur.getLogin());
                     ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                     ed.putBoolean(IS_KNOWN_BOOL, true);
-                    ed.apply();
-                    finish();
+                    ed.commit();
+
+                    Intent mStartActivity = new Intent(Dima3.this, MainActivity.class);
+                    int mPendingIntentId = 123456;
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(Dima3.this, mPendingIntentId, mStartActivity,
+                            PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager mgr = (AlarmManager) Dima3.this.getSystemService(Context.ALARM_SERVICE);
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                    System.exit(0);
+
                 } else if (ur.getStatus().equals(ServerDescriptor.LOGIN_ALREADY_EXISTS_ERROR)){
                     Toast.makeText(this, "Введенный логин уже используется", Toast.LENGTH_LONG).show();
                     //infText.setText("Введенный логин уже используется");
