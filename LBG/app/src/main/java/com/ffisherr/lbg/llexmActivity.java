@@ -6,6 +6,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -24,36 +25,91 @@ public class llexmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
 
-        String [] tags = {"public"};
-        getEvents(tags);
+        calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
+
+        String [] tags = {"public"}; //TODO это мы спрашиваем по тегу паблик?
+        getEvents(tags); //спросить у сервера события
         if (myEvents != null) {
-            // TODO значит что-то пришло
-            for (EventPesronse event : myEvents) {
-                System.out.println(event.getTitle());
-            }
+            //значит что-то пришло
+            serverAnswered();
         } else {
-            System.out.println("\n\nДанных нет\n\n");
+            Toast.makeText(this, "нет ответа от сервера", Toast.LENGTH_LONG).show();
         }
-        //TODO спросить у сервера события
+
     }
 
     protected void serverAnswered() {
-        //TODO добавить все пришедшие события в два layout'а, которые будут отображаться попеременно
+        //в цикле перебора пришедших событий они добавляются в два layouta, из которых отображается один
+        for (EventPesronse event : myEvents) {
+            //System.out.println(event.getTitle());
+            int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
+                    0, wrapContent);
+            LinearLayout common_calendar_layout = new LinearLayout(calendar_layout.getContext());
+            common_calendar_layout.setOrientation(LinearLayout.VERTICAL);
+            calendar_layout.addView(common_calendar_layout, lParams);
+            LinearLayout personal_calendar_layout = new LinearLayout(calendar_layout.getContext());
+            personal_calendar_layout.setOrientation(LinearLayout.VERTICAL);
+            calendar_layout.addView(personal_calendar_layout, lParams);
+            //TODO в зависимости от выбранного календаря задать видимость
+            //personal_calendar_layout.setVisibility(View.INVISIBLE);
 
-        //TODO в цикле перебора пришедших событий они добавляются в два layouta, из которых отображается один
-        int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
-        LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                0, wrapContent);
-        lParams.gravity = Gravity.LEFT;
-        LinearLayout newLayout = new LinearLayout(calendar_layout.getContext());
-        newLayout.setOrientation(LinearLayout.VERTICAL);
-        calendar_layout.addView(newLayout, lParams);
-        TextView newLabel = new TextView(newLayout.getContext());
-        newLabel.setText("текст события");
-        newLayout.addView(newLabel);
-        Button newButton = new Button(newLayout.getContext());
-        newButton.setText("+");
-        newLayout.addView(newButton);
+            if (true) //TODO сравнить нужный тег
+            {
+                lParams = new LinearLayout.LayoutParams(
+                        0, wrapContent);
+                lParams.gravity = Gravity.LEFT;
+                LinearLayout newLayout = new LinearLayout(common_calendar_layout.getContext());
+                newLayout.setOrientation(LinearLayout.HORIZONTAL);
+                common_calendar_layout.addView(newLayout, lParams);
+
+                TextView newLabel = new TextView(newLayout.getContext());
+                newLabel.setText(event.getTitle());
+                newLabel.setWidth(0);
+                newLayout.addView(newLabel);
+
+                Button newButton = new Button(newLayout.getContext()); //TODO дизайн кнопки найти или заменить кнопку на текствью с обработчиком(?)
+                newButton.setText("+");
+                newButton.setWidth(wrapContent);
+                newButton.setGravity(Gravity.RIGHT);
+                newLayout.addView(newButton);
+                View.OnClickListener newBtnListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO отправляем запрос о том, что хотим добавить событие в личное
+                    }
+                };
+                newButton.setOnClickListener(newBtnListener);
+            }
+
+            if (true) //TODO сравнить нужный тег
+            {
+                lParams = new LinearLayout.LayoutParams(
+                        0, wrapContent);
+                lParams.gravity = Gravity.LEFT;
+                LinearLayout newLayout = new LinearLayout(personal_calendar_layout.getContext());
+                newLayout.setOrientation(LinearLayout.VERTICAL);
+                personal_calendar_layout.addView(newLayout, lParams);
+
+                TextView newLabel = new TextView(newLayout.getContext());
+                newLabel.setText(event.getTitle());
+                newLabel.setWidth(0);
+                newLayout.addView(newLabel);
+
+                Button newButton = new Button(newLayout.getContext());
+                newButton.setText("+");
+                newButton.setWidth(wrapContent);
+                newButton.setGravity(Gravity.RIGHT);
+                newLayout.addView(newButton);
+                View.OnClickListener newBtnListener = new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // TODO отправляем запрос о том, что хотим добавить событие в личное
+                    }
+                };
+                newButton.setOnClickListener(newBtnListener);
+            }
+        }
 
     }
 
