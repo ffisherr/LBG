@@ -98,10 +98,30 @@ class EventByTags(Resource):
 			return [{'status': 'error'}]
 
 
+
+class AddMessage(Resource):
+	def post():
+		conn = sqlite3.connect('lbg.db')
+		cursor = conn.cursor()
+		cursor.execute('select max(id) from users')
+		mId = int(cursor.fetchall()) + 1
+		message_text = request.json['message_text']
+		sender_id = request.json['sender_id']
+		dt = request.json['dt']
+		m = Message(mId, dt, sender_id, message_text)
+		print(m.getFullInfo())
+		insertIntoTable(cursor, 'messages', m.addToDB())
+		conn.commit()
+		return jsonify(m.getFullInfo())
+
+
+
+
 api.add_resource(UserById,    '/users/<user_id>')
 api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
+api.add_resource(AddMessage,  '/messages/add_message')
 
 
 if __name__ == '__main__':

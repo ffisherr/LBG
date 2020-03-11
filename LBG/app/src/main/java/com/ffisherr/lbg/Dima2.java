@@ -1,5 +1,8 @@
 package com.ffisherr.lbg;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
@@ -18,9 +21,10 @@ import java.util.concurrent.ExecutionException;
 
 public class Dima2 extends AppCompatActivity {
 
-    private final String ROLE_TEXT     = "role_text";
-    private final String LOGIN_TEXT    = "login_text";
-    private final String IS_KNOWN_BOOL = "is_known_bool";
+    public static final String PREFERENCE_NAME = "my_settings";
+    public static final String ROLE_TEXT       = "role_text";
+    public static final String LOGIN_TEXT      = "login_text";
+    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +50,21 @@ public class Dima2 extends AppCompatActivity {
             UserResponse ur = g.fromJson(result, UserResponse.class);
             if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                 unSuccess.setText("");
+
                 Toast.makeText(this, "Вы вошли", Toast.LENGTH_LONG).show();
-                SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+                SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor ed = sPref.edit();
                 ed.putString(LOGIN_TEXT, ur.getLogin());
                 ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                 ed.putBoolean(IS_KNOWN_BOOL, true);
-                ed.apply();
+                ed.commit();
+                Intent mStartActivity = new Intent(Dima2.this, MainActivity.class);
+                int mPendingIntentId = 123456;
+                PendingIntent mPendingIntent = PendingIntent.getActivity(Dima2.this, mPendingIntentId, mStartActivity,
+                        PendingIntent.FLAG_CANCEL_CURRENT);
+                AlarmManager mgr = (AlarmManager) Dima2.this.getSystemService(Context.ALARM_SERVICE);
+                mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                System.exit(0);
             } else if (ur.getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
 
                 Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
