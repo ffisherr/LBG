@@ -125,13 +125,19 @@ public class llexmActivity extends AppCompatActivity {
         ts.execute(url, event_data);
         try {
             result = ts.get();
-            EventPesronse[] ev = g.fromJson(result, EventPesronse[].class);
-            if (ev[0].getStatus().equals(ServerDescriptor.SUCCESS)) {
-                myEvents = ev;
-            } else if (ev[0].getStatus().equals(ServerDescriptor.INTERNET_ERROR)){
-                Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
-            } else {
-                Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show();
+            try {
+                EventPesronse[] ev = g.fromJson(result, EventPesronse[].class);
+                if (ev[0] != null) {
+                    if (ev[0].getStatus().equals(ServerDescriptor.SUCCESS)) {
+                        myEvents = ev;
+                    } else if (ev[0].getStatus().equals(ServerDescriptor.INTERNET_ERROR)) {
+                        Toast.makeText(this, "Нет доступа к серверу", Toast.LENGTH_LONG).show();
+                    } else {
+                        Toast.makeText(this, "Ошибка", Toast.LENGTH_LONG).show();
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

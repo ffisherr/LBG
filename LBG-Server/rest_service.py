@@ -61,8 +61,10 @@ class UserByLogin(Resource):
 			user = cursor.execute('select * from users where login="%s" and passw_hash="%s"'
 				%(user_login, passw_hash))
 			for u in user:
+				print(u)
 				result = User(u)
-			return jsonify({'status':'success', 'info':result.getFullInfo()})
+			print(result.getFullInfo())
+			return jsonify(result.getFullInfo())
 		except:
 			return {'status': 'error'}
 
@@ -90,15 +92,36 @@ class EventByTags(Resource):
 							break
 					if z == True:
 						break
-			return jsonify({'status':'success', 'info':events})
+			print(events)
+			return jsonify(events)
 		except:
-			return {'status': 'error'}
+			return [{'status': 'error'}]
+
+
+
+class AddMessage(Resource):
+	def post():
+		conn = sqlite3.connect('lbg.db')
+		cursor = conn.cursor()
+		cursor.execute('select max(id) from users')
+		mId = int(cursor.fetchall()) + 1
+		message_text = request.json['message_text']
+		sender_id = request.json['sender_id']
+		dt = request.json['dt']
+		m = Message(mId, dt, sender_id, message_text)
+		print(m.getFullInfo())
+		insertIntoTable(cursor, 'messages', m.addToDB())
+		conn.commit()
+		return jsonify(m.getFullInfo())
+
+
 
 
 api.add_resource(UserById,    '/users/<user_id>')
 api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
+api.add_resource(AddMessage,  '/messages/add_message')
 
 
 if __name__ == '__main__':

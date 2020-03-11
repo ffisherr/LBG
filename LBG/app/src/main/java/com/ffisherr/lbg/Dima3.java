@@ -1,6 +1,10 @@
 package com.ffisherr.lbg;
 
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -21,9 +25,10 @@ import java.util.concurrent.ExecutionException;
 
 public class Dima3 extends AppCompatActivity {
 
-    private final String ROLE_TEXT     = "role_text";
-    private final String LOGIN_TEXT    = "login_text";
-    private final String IS_KNOWN_BOOL = "is_known_bool";
+    public static final String PREFERENCE_NAME = "my_settings";
+    public static final String ROLE_TEXT       = "role_text";
+    public static final String LOGIN_TEXT      = "login_text";
+    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
     String[] names = { "МГТУ", "МГУ", "МАИ", "МЭИ" };
 
@@ -87,13 +92,23 @@ public class Dima3 extends AppCompatActivity {
                 UserResponse ur = g.fromJson(result, UserResponse.class);
                 if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                     infText.setText("");
+                    
                     Toast.makeText(this, "Вы зарегестрированы", Toast.LENGTH_LONG).show();
-                    SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+                    SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor ed = sPref.edit();
                     ed.putString(LOGIN_TEXT, ur.getLogin());
                     ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                     ed.putBoolean(IS_KNOWN_BOOL, true);
-                    ed.apply();
+                    ed.commit();
+
+                    Intent mStartActivity = new Intent(Dima3.this, MainActivity.class);
+                    int mPendingIntentId = 123456;
+                    PendingIntent mPendingIntent = PendingIntent.getActivity(Dima3.this, mPendingIntentId, mStartActivity,
+                            PendingIntent.FLAG_CANCEL_CURRENT);
+                    AlarmManager mgr = (AlarmManager) Dima3.this.getSystemService(Context.ALARM_SERVICE);
+                    mgr.set(AlarmManager.RTC, System.currentTimeMillis() + 100, mPendingIntent);
+                    System.exit(0);
+
                 } else if (ur.getStatus().equals(ServerDescriptor.LOGIN_ALREADY_EXISTS_ERROR)){
                     Toast.makeText(this, "Введенный логин уже используется", Toast.LENGTH_LONG).show();
                     //infText.setText("Введенный логин уже используется");
