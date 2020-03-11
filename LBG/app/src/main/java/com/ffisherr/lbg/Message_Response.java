@@ -3,17 +3,25 @@ package com.ffisherr.lbg;
 import java.util.Date;
 
 public class Message_Response {
-    private int id;
+    private Integer id;
     private String dt;
-    private int sender_id;
+    private Integer sender_id;
     private String message_text;
 
-    public int getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getSender_id() {
+        return sender_id;
+    }
+
+    public void setSender_id(Integer sender_id) {
+        this.sender_id = sender_id;
     }
 
     public String getDt() {
@@ -24,13 +32,6 @@ public class Message_Response {
         this.dt = dt;
     }
 
-    public int getSender_id() {
-        return sender_id;
-    }
-
-    public void setSender_id(int sender_id) {
-        this.sender_id = sender_id;
-    }
 
     public String getMessage_text() {
         return message_text;
