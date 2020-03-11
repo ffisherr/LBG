@@ -4,7 +4,7 @@ python -m venv env
 После этого создастся папка env, внутри которой будет лежать локальный интерпретатор и библиотеки. 
 2. Запустить локальный интерпретатор
 (Для unix) source env/bin/activate
-(ля windows) ./env/bin/activate.sh
+(ля windows) ./env/Scripts/activate
 3. Установить необходимые библиотеки командой
 pip install -r requirements.txt
 4. Запустить сервис
