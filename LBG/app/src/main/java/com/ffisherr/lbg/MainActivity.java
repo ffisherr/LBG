@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         ed.putBoolean(IS_KNOWN_BOOL, false);
         ed.commit();*/
 
-
-        Intent i = new Intent(MainActivity.this, ChatActivity.class);
-        startActivity(i);
         sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         String  uLogin  = sPref.getString(LOGIN_TEXT    , "");
         String  uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
