@@ -27,4 +27,11 @@
         android:id="@+id/smth_else"
         android:onClick="onClickSmthElse" />
 
+    <Button
+        android:id="@+id/crestici"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCrestici"
+        android:text="Крестики Нолики" />
+
 </LinearLayout>

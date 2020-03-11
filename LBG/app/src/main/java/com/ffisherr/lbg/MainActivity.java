@@ -55,4 +55,9 @@ public class MainActivity extends AppCompatActivity {
         ed.putBoolean(IS_KNOWN_BOOL, true);
         ed.apply();
     }
+
+    public void onClickCrestici(View view){
+        Intent intent = new Intent(MainActivity.this, crestici.class);
+        startActivity(intent);
+    }
 }
