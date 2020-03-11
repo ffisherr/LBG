@@ -41,7 +41,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void onClickChat(View view) {
-
+        Intent intent = new Intent(MainActivity.this, ChatActivity.class);
+        startActivity(intent);
     }
 
     public void onClickSmthElse(View view) {
