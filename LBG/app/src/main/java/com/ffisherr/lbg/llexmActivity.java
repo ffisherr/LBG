@@ -43,8 +43,9 @@ public class llexmActivity extends AppCompatActivity {
         for (EventPesronse event : myEvents) {
             //System.out.println(event.getTitle());
             int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
+            int matchParent = LinearLayout.LayoutParams.MATCH_PARENT;
             LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(
-                    0, wrapContent);
+                    matchParent, wrapContent);
             LinearLayout common_calendar_layout = new LinearLayout(calendar_layout.getContext());
             common_calendar_layout.setOrientation(LinearLayout.VERTICAL);
             calendar_layout.addView(common_calendar_layout, lParams);
@@ -57,7 +58,7 @@ public class llexmActivity extends AppCompatActivity {
             if (true) //TODO сравнить нужный тег
             {
                 lParams = new LinearLayout.LayoutParams(
-                        0, wrapContent);
+                        matchParent, wrapContent);
                 lParams.gravity = Gravity.LEFT;
                 LinearLayout newLayout = new LinearLayout(common_calendar_layout.getContext());
                 newLayout.setOrientation(LinearLayout.HORIZONTAL);
@@ -65,7 +66,7 @@ public class llexmActivity extends AppCompatActivity {
 
                 TextView newLabel = new TextView(newLayout.getContext());
                 newLabel.setText(event.getTitle());
-                newLabel.setWidth(0);
+                newLabel.setWidth(matchParent);
                 newLayout.addView(newLabel);
 
                 Button newButton = new Button(newLayout.getContext()); //TODO дизайн кнопки найти или заменить кнопку на текствью с обработчиком(?)
@@ -85,7 +86,7 @@ public class llexmActivity extends AppCompatActivity {
             if (true) //TODO сравнить нужный тег
             {
                 lParams = new LinearLayout.LayoutParams(
-                        0, wrapContent);
+                        matchParent, wrapContent);
                 lParams.gravity = Gravity.LEFT;
                 LinearLayout newLayout = new LinearLayout(personal_calendar_layout.getContext());
                 newLayout.setOrientation(LinearLayout.VERTICAL);
@@ -93,7 +94,7 @@ public class llexmActivity extends AppCompatActivity {
 
                 TextView newLabel = new TextView(newLayout.getContext());
                 newLabel.setText(event.getTitle());
-                newLabel.setWidth(0);
+                newLabel.setWidth(matchParent);
                 newLayout.addView(newLabel);
 
                 Button newButton = new Button(newLayout.getContext());
