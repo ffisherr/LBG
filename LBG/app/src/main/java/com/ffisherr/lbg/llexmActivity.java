@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
@@ -67,15 +68,17 @@ public class llexmActivity extends AppCompatActivity {
                 common_calendar_layout.addView(newLayout, lParams);
 
                 TextView newLabel = new TextView(newLayout.getContext());
+                newLabel.setLayoutParams(lParams);
                 newLabel.setText(event.getTitle());
-                newLabel.setWidth(wrapContent);
                 newLayout.addView(newLabel);
 
                 Button newButton = new Button(newLayout.getContext()); //TODO дизайн кнопки найти или заменить кнопку на текствью с обработчиком(?)
-                newButton.setText("+");
-                newButton.setWidth(40); //wrapContent
+                /*newButton.setWidth(40); //wrapContent
                 newButton.setHeight(40); //wrapContent
-                newButton.setGravity(Gravity.RIGHT);
+                newButton.setGravity(Gravity.RIGHT);*/
+                lParams.gravity = Gravity.RIGHT;
+                newButton.setLayoutParams(lParams);
+                newButton.setText("+");
                 newLayout.addView(newButton);
                 View.OnClickListener newBtnListener = new View.OnClickListener() {
                     @Override
