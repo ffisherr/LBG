@@ -22,6 +22,26 @@ class User():
 		return result
 
 
+def Message(self):
+	def __init__(self, arg):
+		self.id, self.dt, self.sender_id, self.message_text = arg
+
+	def getFullInfo(self):
+		info = {'id': self.id, 
+				'sender_id': self.sender_id,
+				'dt': self.dt,
+				'message_text': self.message_text,
+				'status': 'success'}
+		return info
+
+	def addToDB(self):
+		result = []
+		result.append(self.id)
+		result.append(self.dt)
+		result.append(self.sender_id)
+		result.append(self.message_text)
+		return result
+
 class Event():
 	def __init__(self, arg):
 		self.id, self.title, self.dt, self.about, self.tags = arg

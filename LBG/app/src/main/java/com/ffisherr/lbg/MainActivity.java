@@ -2,6 +2,7 @@ package com.ffisherr.lbg;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -12,16 +13,17 @@ public class MainActivity extends AppCompatActivity {
 
     private SharedPreferences sPref;
 
-    private final String ROLE_TEXT     = "role_text";
-    private final String LOGIN_TEXT    = "login_text";
-    private final String IS_KNOWN_BOOL = "is_known_bool";
+    public static final String PREFERENCE_NAME = "my_settings";
+    public static final String ROLE_TEXT       = "role_text";
+    public static final String LOGIN_TEXT      = "login_text";
+    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sPref = getPreferences(MODE_PRIVATE);
+        sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         String  uLogin  = sPref.getString(LOGIN_TEXT    , "");
         String  uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
         Boolean isKnown = sPref.getBoolean(IS_KNOWN_BOOL, false);

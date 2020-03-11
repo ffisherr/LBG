@@ -1,6 +1,7 @@
 package com.ffisherr.lbg;
 
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
@@ -21,9 +22,10 @@ import java.util.concurrent.ExecutionException;
 
 public class Dima3 extends AppCompatActivity {
 
-    private final String ROLE_TEXT     = "role_text";
-    private final String LOGIN_TEXT    = "login_text";
-    private final String IS_KNOWN_BOOL = "is_known_bool";
+    public static final String PREFERENCE_NAME = "my_settings";
+    public static final String ROLE_TEXT       = "role_text";
+    public static final String LOGIN_TEXT      = "login_text";
+    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
     String[] names = { "МГТУ", "МГУ", "МАИ", "МЭИ" };
 
@@ -87,8 +89,9 @@ public class Dima3 extends AppCompatActivity {
                 UserResponse ur = g.fromJson(result, UserResponse.class);
                 if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                     infText.setText("");
+                    
                     Toast.makeText(this, "Вы зарегестрированы", Toast.LENGTH_LONG).show();
-                    SharedPreferences sPref = getPreferences(MODE_PRIVATE);
+                    SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor ed = sPref.edit();
                     ed.putString(LOGIN_TEXT, ur.getLogin());
                     ed.putString(ROLE_TEXT, ur.getRole_id().toString());
