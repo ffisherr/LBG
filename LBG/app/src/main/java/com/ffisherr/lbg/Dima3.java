@@ -94,6 +94,7 @@ public class Dima3 extends AppCompatActivity {
                     ed.putString(ROLE_TEXT, ur.getRole_id().toString());
                     ed.putBoolean(IS_KNOWN_BOOL, true);
                     ed.apply();
+                    finish();
                 } else if (ur.getStatus().equals(ServerDescriptor.LOGIN_ALREADY_EXISTS_ERROR)){
                     Toast.makeText(this, "Введенный логин уже используется", Toast.LENGTH_LONG).show();
                     //infText.setText("Введенный логин уже используется");

@@ -6,10 +6,11 @@ class User():
 		self.id, self.login, self.passw_hash, self.role_id = arg
 
 	def getFullInfo(self):
-		info = {'id': self.id, 
+		info = {'id': str(self.id), 
 				'login': self.login,
 				'passw_hash': self.passw_hash,
-				'role_id': self.role_id}
+				'Role_id': str(self.role_id),
+				'status': 'success'}
 		return info
 
 	def addToDB(self):

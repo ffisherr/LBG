@@ -61,8 +61,10 @@ class UserByLogin(Resource):
 			user = cursor.execute('select * from users where login="%s" and passw_hash="%s"'
 				%(user_login, passw_hash))
 			for u in user:
+				print(u)
 				result = User(u)
-			return jsonify({'status':'success', 'info':result.getFullInfo()})
+			print(result.getFullInfo())
+			return jsonify(result.getFullInfo())
 		except:
 			return {'status': 'error'}
 
