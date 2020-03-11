@@ -55,7 +55,7 @@ public class llexmActivity extends AppCompatActivity {
             personal_calendar_layout.setOrientation(LinearLayout.VERTICAL);
             calendar_layout.addView(personal_calendar_layout, lParams);
             //TODO в зависимости от выбранного календаря задать видимость
-            personal_calendar_layout.setVisibility(View.INVISIBLE);
+            //personal_calendar_layout.setVisibility(View.INVISIBLE);
 
             if (true) //TODO сравнить нужный тег
             {
@@ -68,13 +68,13 @@ public class llexmActivity extends AppCompatActivity {
 
                 TextView newLabel = new TextView(newLayout.getContext());
                 newLabel.setText(event.getTitle());
-                newLabel.setWidth(matchParent);
+                newLabel.setWidth(wrapContent);
                 newLayout.addView(newLabel);
 
                 Button newButton = new Button(newLayout.getContext()); //TODO дизайн кнопки найти или заменить кнопку на текствью с обработчиком(?)
                 newButton.setText("+");
-                newButton.setWidth(wrapContent);
-                newButton.setHeight(wrapContent);
+                newButton.setWidth(40); //wrapContent
+                newButton.setHeight(40); //wrapContent
                 newButton.setGravity(Gravity.RIGHT);
                 newLayout.addView(newButton);
                 View.OnClickListener newBtnListener = new View.OnClickListener() {
@@ -97,13 +97,13 @@ public class llexmActivity extends AppCompatActivity {
 
                 TextView newLabel = new TextView(newLayout.getContext());
                 newLabel.setText(event.getTitle());
-                newLabel.setWidth(matchParent);
+                newLabel.setWidth(wrapContent);
                 newLayout.addView(newLabel);
 
                 Button newButton = new Button(newLayout.getContext());
                 newButton.setText("+");
-                newButton.setWidth(wrapContent);
-                newButton.setHeight(wrapContent);
+                newButton.setWidth(40); //wrapContent
+                newButton.setHeight(40); //wrapContent
                 newButton.setGravity(Gravity.RIGHT);
                 newLayout.addView(newButton);
                 View.OnClickListener newBtnListener = new View.OnClickListener() {
