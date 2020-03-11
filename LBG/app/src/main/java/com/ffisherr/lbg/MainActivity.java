@@ -1,6 +1,9 @@
 package com.ffisherr.lbg;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -32,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(MainActivity.this, Dima.class);
             startActivity(intent);
         }
-
     }
 
     public void onClickLogin(View view) {
@@ -48,5 +50,26 @@ public class MainActivity extends AppCompatActivity {
     public void onClickSmthElse(View view) {
         Intent intent = new Intent(MainActivity.this, llexmActivity.class);
         startActivity(intent);
+    }
+
+    private class SectionPagerAdapter extends FragmentPagerAdapter {
+        public SectionPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public int getCount() {
+            return 2;
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            switch (position) {
+                case 1:
+
+
+            }
+            return null;
+        }
     }
 }
