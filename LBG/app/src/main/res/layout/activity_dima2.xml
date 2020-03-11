@@ -65,31 +65,22 @@
         android:id="@+id/attempts"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/password_text"
         android:layout_below="@+id/password_text"
+        android:layout_alignStart="@+id/password_text"
         android:layout_marginStart="30dp"
         android:layout_marginTop="48dp"
-        android:text="@string/attemptsNumber_text"
-        android:visibility="invisible"
-        android:textAppearance="?android:attr/textAppearanceMedium" />
+        android:layout_marginBottom="22dp"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        />
 
     <Button
         android:id="@+id/button_Login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/edit_password"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="94dp"
+        android:layout_below="@+id/attempts"
+        android:layout_marginTop="96dp"
         android:onClick="onClickLogin"
         android:text="@string/In" />
-
-    <TextView
-        android:id="@+id/number_of_attempts"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/user_text"
-        android:layout_alignTop="@+id/attempts"
-        android:visibility="invisible" />
 
     <TextView
         android:id="@+id/login_locked"

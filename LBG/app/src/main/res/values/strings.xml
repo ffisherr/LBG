@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">LBG</string>
-
+    <string name="Log">Введите логин</string>
     <string name="In">Войти</string>
     <string name="autorization_text">Авторизация</string>
 
     <!-- Регистрация начало -->
     <string name="surname_text">Фамилия:</string>
     <string name="surname_hint">Петров</string>
-
+    <string name="Reg">Зарегестрироваться</string>
     <string name="firstName_text">Имя:</string>
     <string name="firstName_hint">Алексей</string>
 
