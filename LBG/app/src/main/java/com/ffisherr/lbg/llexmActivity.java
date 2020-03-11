@@ -8,7 +8,9 @@ import android.os.Bundle;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,7 +19,7 @@ import com.google.gson.Gson;
 import java.util.concurrent.ExecutionException;
 
 public class llexmActivity extends AppCompatActivity {
-    LinearLayout calendar_layout;// = (LinearLayout) findViewById(R.id.calendar_layout);
+    ScrollView calendar_layout;// = (LinearLayout) findViewById(R.id.calendar_layout);
     EventPesronse [] myEvents;
 
     @Override
@@ -25,7 +27,7 @@ public class llexmActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_llexm);
 
-        calendar_layout = (LinearLayout) findViewById(R.id.calendar_layout);
+        calendar_layout = (ScrollView) findViewById(R.id.calendar_layout);
 
         String [] tags = {"public"}; //TODO это мы спрашиваем по тегу паблик?
         getEvents(tags); //спросить у сервера события
@@ -53,7 +55,7 @@ public class llexmActivity extends AppCompatActivity {
             personal_calendar_layout.setOrientation(LinearLayout.VERTICAL);
             calendar_layout.addView(personal_calendar_layout, lParams);
             //TODO в зависимости от выбранного календаря задать видимость
-            //personal_calendar_layout.setVisibility(View.INVISIBLE);
+            personal_calendar_layout.setVisibility(View.INVISIBLE);
 
             if (true) //TODO сравнить нужный тег
             {
@@ -72,6 +74,7 @@ public class llexmActivity extends AppCompatActivity {
                 Button newButton = new Button(newLayout.getContext()); //TODO дизайн кнопки найти или заменить кнопку на текствью с обработчиком(?)
                 newButton.setText("+");
                 newButton.setWidth(wrapContent);
+                newButton.setHeight(wrapContent);
                 newButton.setGravity(Gravity.RIGHT);
                 newLayout.addView(newButton);
                 View.OnClickListener newBtnListener = new View.OnClickListener() {
@@ -89,7 +92,7 @@ public class llexmActivity extends AppCompatActivity {
                         matchParent, wrapContent);
                 lParams.gravity = Gravity.LEFT;
                 LinearLayout newLayout = new LinearLayout(personal_calendar_layout.getContext());
-                newLayout.setOrientation(LinearLayout.VERTICAL);
+                newLayout.setOrientation(LinearLayout.HORIZONTAL);
                 personal_calendar_layout.addView(newLayout, lParams);
 
                 TextView newLabel = new TextView(newLayout.getContext());
@@ -100,6 +103,7 @@ public class llexmActivity extends AppCompatActivity {
                 Button newButton = new Button(newLayout.getContext());
                 newButton.setText("+");
                 newButton.setWidth(wrapContent);
+                newButton.setHeight(wrapContent);
                 newButton.setGravity(Gravity.RIGHT);
                 newLayout.addView(newButton);
                 View.OnClickListener newBtnListener = new View.OnClickListener() {
