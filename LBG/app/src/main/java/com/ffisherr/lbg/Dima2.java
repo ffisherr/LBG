@@ -21,11 +21,6 @@ import java.util.concurrent.ExecutionException;
 
 public class Dima2 extends AppCompatActivity {
 
-    public static final String PREFERENCE_NAME = "my_settings";
-    public static final String ROLE_TEXT       = "role_text";
-    public static final String LOGIN_TEXT      = "login_text";
-    public static final String IS_KNOWN_BOOL   = "is_known_bool";
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -52,11 +47,13 @@ public class Dima2 extends AppCompatActivity {
                 unSuccess.setText("");
 
                 Toast.makeText(this, "Вы вошли", Toast.LENGTH_LONG).show();
-                SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences sPref = getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
                 SharedPreferences.Editor ed = sPref.edit();
-                ed.putString(LOGIN_TEXT, ur.getLogin());
-                ed.putString(ROLE_TEXT, ur.getRole_id().toString());
-                ed.putBoolean(IS_KNOWN_BOOL, true);
+                ed.putString(Config.LOGIN_TEXT, ur.getLogin());
+                ed.putInt(Config.ROLE_ID, ur.getRole_id());
+                ed.putInt(Config.USER_ID, ur.getId());
+                ed.putInt(Config.UNIVERSITY_ID, ur.getUniversity_id());
+                ed.putBoolean(Config.IS_KNOWN_BOOL, true);
                 ed.commit();
                 Intent mStartActivity = new Intent(Dima2.this, MainActivity.class);
                 int mPendingIntentId = 123456;

@@ -26,14 +26,14 @@ public class EventArrayAdapter extends ArrayAdapter<EventPesronse> {
 
         TextView textId    = eventView.findViewById(R.id.id_);
         TextView textDt    = eventView.findViewById(R.id.dt_);
-        TextView textAbout = eventView.findViewById(R.id.about_);
+        //TextView textAbout = eventView.findViewById(R.id.about_);
         TextView textTitle = eventView.findViewById(R.id.title_);
 
         EventPesronse event = values[position];
 
         textId.setText(event.getId().toString());
         textDt.setText(event.getDt());
-        textAbout.setText(event.getAbout());
+        //textAbout.setText(event.getAbout());
         textTitle.setText(event.getTitle());
 
         return eventView;

@@ -22,6 +22,9 @@ import java.util.concurrent.ExecutionException;
 public class CalendarFragment extends ListFragment {
 
     EventPesronse[] allEvents;
+    private String uLogin;
+    private String uUniversity;
+    private Boolean uIsKnown;
     private Listener listener;
 
     public CalendarFragment() {
@@ -39,7 +42,10 @@ public class CalendarFragment extends ListFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        String[] tags = {"tag2"};
+        uIsKnown    = getArguments().getBoolean(Config.IS_KNOWN_BOOL);
+        uLogin      = getArguments().getString(Config.LOGIN_TEXT);
+        uUniversity = getArguments().getString(Config.UNIVERSITY_TEXT);
+        String[] tags = {Config.common_tag, uLogin, uUniversity};
         getEvents(tags);
         EventArrayAdapter arr;
         if (allEvents != null) {

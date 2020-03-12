@@ -18,7 +18,12 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.concurrent.ExecutionException;
+
+import static com.ffisherr.lbg.Config.LOGIN_TEXT;
 
 
 public class ChatFragment extends Fragment {
@@ -27,14 +32,14 @@ public class ChatFragment extends Fragment {
     Button sendBtn;
     Message_Response message;
     LinearLayout messagesLayout;
+    private String uLogin;
+    private String uUniversity;
+    private Boolean uIsKnown;
+    private Integer uId;
 
 
     private static final int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
     private static final int matchParent = LinearLayout.LayoutParams.MATCH_PARENT;
-    public static final String PREFERENCE_NAME = "my_settings";
-    public static final String ROLE_TEXT       = "role_text";
-    public static final String LOGIN_TEXT      = "login_text";
-    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
 
     public ChatFragment() {
@@ -47,6 +52,10 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myInflater = inflater;
+        uIsKnown    = getArguments().getBoolean(Config.IS_KNOWN_BOOL);
+        uLogin      = getArguments().getString(Config.LOGIN_TEXT);
+        uUniversity = getArguments().getString(Config.UNIVERSITY_TEXT);
+        uId         = getArguments().getInt(Config.USER_ID);
         final View view = inflater.inflate(R.layout.fragment_chat, container, false);
         sendBtn = view.findViewById(R.id.send_message_button);
         messagesLayout = view.findViewById(R.id.all_messages_field);
@@ -73,8 +82,12 @@ public class ChatFragment extends Fragment {
                     return;
                 }
                 messTextEdit.setText("");
-                Message_Response newMessage = new Message_Response(0, "dateTime", 1,
-                        newMessageEditText);
+                DateFormat myDf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+                Date dateObj = new Date();
+                String currDate = myDf.format(dateObj);
+                Message_Response newMessage = new Message_Response(-1, currDate,
+                        uId, newMessageEditText);
+                message = null;
                 sendMessage(newMessage);
                 if (message != null) {
 
@@ -92,7 +105,7 @@ public class ChatFragment extends Fragment {
                     newMessageLayout.addView(newMessageText);
 
                     TextView newMessageSender = new TextView(newMessageLayout.getContext());
-                    newMessageSender.setText(message.getSender_id().toString());
+                    newMessageSender.setText(getArguments().getString(LOGIN_TEXT));
                     newMessageSender.setWidth(wrapContent);
                     newMessageLayout.addView(newMessageSender);
 

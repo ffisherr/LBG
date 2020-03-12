@@ -14,33 +14,48 @@ import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
 
+import static com.ffisherr.lbg.Config.IS_KNOWN_BOOL;
+import static com.ffisherr.lbg.Config.LOGIN_TEXT;
+import static com.ffisherr.lbg.Config.PREFERENCE_NAME;
+import static com.ffisherr.lbg.Config.ROLE_TEXT;
+import static com.ffisherr.lbg.Config.UNIVERSITY_ID;
+import static com.ffisherr.lbg.Config.UNIVERSITY_TEXT;
+import static com.ffisherr.lbg.Config.USER_ID;
+
 
 public class MainActivity extends AppCompatActivity implements Listener{
 
     private SharedPreferences sPref;
 
+    private String  uLogin;
+    private String  uRole;
+    private String  uUniversity;
+    private Integer uRoleId;
+    private Integer uUniversityId;
+    private Integer uId;
+    private Boolean isKnown;
 
-    public static final String PREFERENCE_NAME = "my_settings";
-    public static final String ROLE_TEXT       = "role_text";
-    public static final String LOGIN_TEXT      = "login_text";
-    public static final String IS_KNOWN_BOOL   = "is_known_bool";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-       /* sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        /*sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(LOGIN_TEXT, "");
         ed.putString(ROLE_TEXT, "");
         ed.putBoolean(IS_KNOWN_BOOL, false);
         ed.commit();*/
 
-        sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-        String  uLogin  = sPref.getString(LOGIN_TEXT    , "");
-        String  uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
-        Boolean isKnown = sPref.getBoolean(IS_KNOWN_BOOL, false);
+        sPref   = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        uLogin  = sPref.getString(LOGIN_TEXT    , "");
+        uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
+        isKnown = sPref.getBoolean(IS_KNOWN_BOOL, false);
+
+        uUniversity   = sPref.getString(UNIVERSITY_TEXT, "");
+        uUniversityId = sPref.getInt(UNIVERSITY_ID, 0);
+        uId           = sPref.getInt(USER_ID, 0);
 
         if (isKnown.equals(false)) {
             Intent intent = new Intent(MainActivity.this, Dima.class);
@@ -66,11 +81,21 @@ public class MainActivity extends AppCompatActivity implements Listener{
 
         @Override
         public Fragment getItem(int position) {
+            Bundle bundle = new Bundle();
+            bundle.putBoolean(IS_KNOWN_BOOL, isKnown);
+            bundle.putString(LOGIN_TEXT, uLogin);
+            bundle.putString(UNIVERSITY_TEXT, uUniversity);
+            bundle.putInt(UNIVERSITY_ID, uUniversityId);
+            bundle.putInt(USER_ID, uId);
             switch (position) {
                 case 0:
-                    return new CalendarFragment();
+                    CalendarFragment cal = new CalendarFragment();
+                    cal.setArguments(bundle);
+                    return cal;
                 case 1:
-                    return new ChatFragment();
+                    ChatFragment chat = new ChatFragment();
+                    chat.setArguments(bundle);
+                    return chat;
             }
             return new CalendarFragment();
         }

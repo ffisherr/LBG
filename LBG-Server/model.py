@@ -3,22 +3,32 @@ import json
 
 class User():
 	def __init__(self, arg):
-		self.id, self.login, self.passw_hash, self.role_id = arg
+		self.id, self.role_id, self.university_id, \
+		self.FirstName, self.SurName, self.SecondName, \
+		 self.login, self.passw_hash = arg
 
 	def getFullInfo(self):
 		info = {'id': str(self.id), 
 				'login': self.login,
 				'passw_hash': self.passw_hash,
-				'Role_id': str(self.role_id),
+				'role_id': str(self.role_id),
+				'university_id': self.university_id,
+				'FirstName': self.FirstName,
+				'SurName': self.SurName,
+				'SecondName': self.SecondName,
 				'status': 'success'}
 		return info
 
 	def addToDB(self):
 		result = []
 		result.append(self.id)
+		result.append(self.role_id)
+		result.append(self.university_id)
+		result.append(self.FirstName)
+		result.append(self.SurName)
+		result.append(self.SecondName)
 		result.append(self.login)
 		result.append(self.passw_hash)
-		result.append(self.role_id)
 		return result
 
 

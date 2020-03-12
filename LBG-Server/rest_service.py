@@ -18,7 +18,12 @@ class UserAdd(Resource):
 			cursor     = conn.cursor()
 			Login      = request.json['login']
 			Passw_hash = request.json['passw_hash']
-			Role_id    = request.json['Role_id']
+			Role_id    = request.json['role_id']
+			University_id = request.json['university_id']
+			FirstName     = request.json['FirstName']
+			SurName       = request.json['SurName']
+			SecondName    = request.json['SecondName']
+
 
 			alikeUs = cursor.execute('select count(*) from users \
 			where login="%s"'%Login)
@@ -32,7 +37,8 @@ class UserAdd(Resource):
 			for Uuid in Uid:
 				pass 
 			Uuid = int(Uuid[0]) + 1
-			new_user = User([Uuid, Login, Passw_hash, Role_id])
+			new_user = User([Uuid, Role_id, University_id,
+			FirstName, SurName, SecondName, Login, Passw_hash])
 			insertIntoTable(cursor, 'users', new_user.addToDB())
 			conn.commit()
 			return {'status':'success'}			
