@@ -76,8 +76,16 @@ public class Dima3 extends AppCompatActivity {
             user.setPassw_hash(p1);
             user.setRole_id(1);
 
+            Spinner univerSpinner = findViewById(R.id.University);
+            user.setUniversity_id(univerSpinner.getSelectedItemPosition());
+
             editText = findViewById(R.id.edit_login);
             user.setLogin(editText.getText().toString());
+
+            if (!user.checkIfOk()) {
+                Toast.makeText(this, "Не заполнены обязательные поля", Toast.LENGTH_LONG).show();
+                return;
+            }
 
             String result;
             TaskPostServer ts = new TaskPostServer();
@@ -89,17 +97,16 @@ public class Dima3 extends AppCompatActivity {
 
             try {
                 result = ts.get();
+                if (result.equals("[{'status':'connectionError'}]")){
+                    Toast.makeText(this, "Нет интернет соединения", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 UserResponse ur = g.fromJson(result, UserResponse.class);
+                System.out.println(result);
                 if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                     infText.setText("");
                     
                     Toast.makeText(this, "Вы зарегестрированы", Toast.LENGTH_LONG).show();
-                    SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor ed = sPref.edit();
-                    ed.putString(LOGIN_TEXT, ur.getLogin());
-                    ed.putString(ROLE_TEXT, ur.getRole_id().toString());
-                    ed.putBoolean(IS_KNOWN_BOOL, true);
-                    ed.commit();
 
                     Intent mStartActivity = new Intent(Dima3.this, MainActivity.class);
                     int mPendingIntentId = 123456;
