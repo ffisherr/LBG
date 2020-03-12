@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from model import User, Event
+from model import User, Event, Message
 from db import insertIntoTable
 from flask import Flask, request
 from flask_restful import Resource, Api
@@ -100,16 +100,27 @@ class EventByTags(Resource):
 
 
 class AddMessage(Resource):
-	def post():
+	def post(self):
+		print(request.json)
 		conn = sqlite3.connect('lbg.db')
 		cursor = conn.cursor()
-		cursor.execute('select max(id) from users')
-		mId = int(cursor.fetchall()) + 1
+
+		mId = cursor.execute('select max(id) from messages')
+		for MmId in mId:
+			pass 
+		mId = int(MmId[0]) + 1
+
 		message_text = request.json['message_text']
 		sender_id = request.json['sender_id']
 		dt = request.json['dt']
-		m = Message(mId, dt, sender_id, message_text)
-		print(m.getFullInfo())
+
+		print(mId)
+		print(sender_id)
+		print(message_text)
+		print(dt)
+
+		m = Message([mId, dt, sender_id, message_text])
+		print(m)
 		insertIntoTable(cursor, 'messages', m.addToDB())
 		conn.commit()
 		return jsonify(m.getFullInfo())
@@ -121,7 +132,7 @@ api.add_resource(UserById,    '/users/<user_id>')
 api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
-api.add_resource(AddMessage,  '/messages/add_message')
+api.add_resource(AddMessage,  '/add_message')
 
 
 if __name__ == '__main__':

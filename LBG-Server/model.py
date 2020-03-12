@@ -22,9 +22,10 @@ class User():
 		return result
 
 
-def Message(self):
+class Message():
 	def __init__(self, arg):
 		self.id, self.dt, self.sender_id, self.message_text = arg
+		print(self)
 
 	def getFullInfo(self):
 		info = {'id': self.id, 

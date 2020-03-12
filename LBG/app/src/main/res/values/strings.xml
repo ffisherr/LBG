@@ -31,7 +31,6 @@
 
     <string name="calendar_tab">События</string>
     <string name="chat_tab">Чат</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <!-- Вход конец -->
+
+    <string name="send_btn_text">Отправить</string>
 </resources>

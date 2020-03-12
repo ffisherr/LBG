@@ -15,7 +15,7 @@ import android.view.View;
 import com.google.android.material.tabs.TabLayout;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements Listener{
 
     private SharedPreferences sPref;
 
@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
     private class SectionPagerAdapter extends FragmentPagerAdapter {
         public SectionPagerAdapter(FragmentManager fm) {
-            super(fm);
+            super(fm, FragmentPagerAdapter.BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT);
         }
 
         @Override
@@ -85,5 +85,13 @@ public class MainActivity extends AppCompatActivity {
             }
             return null;
         }
+    }
+    public void eventClicked(Integer id, String title, String about, String dt) {
+        Intent intent = new Intent(this, EventDescriptionActivity.class);
+        intent.putExtra(EventDescriptionActivity.ABOUT_EXTRA, about);
+        intent.putExtra(EventDescriptionActivity.TITLE_EXTRA, title);
+        intent.putExtra(EventDescriptionActivity.DT_EXTRA, dt);
+        intent.putExtra(EventDescriptionActivity.ID_EXTRA, id);
+        startActivity(intent);
     }
 }
