@@ -82,6 +82,11 @@ public class Dima3 extends AppCompatActivity {
             editText = findViewById(R.id.edit_login);
             user.setLogin(editText.getText().toString());
 
+            if (!user.checkIfOk()) {
+                Toast.makeText(this, "Не заполнены обязательные поля", Toast.LENGTH_LONG).show();
+                return;
+            }
+
             String result;
             TaskPostServer ts = new TaskPostServer();
             String url = ServerDescriptor.serverIpAdress + "/user_add";

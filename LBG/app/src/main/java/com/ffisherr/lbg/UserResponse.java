@@ -119,4 +119,11 @@ public class UserResponse {
     public Integer getUniversity_id() {
         return university_id;
     }
+
+    public boolean checkIfOk() {
+        if (!this.FirstName.equals("") && !this.SurName.equals("")
+                && !this.passw_hash.equals("") && !this.login.equals(""))
+            return true;
+        return false;
+    }
 }

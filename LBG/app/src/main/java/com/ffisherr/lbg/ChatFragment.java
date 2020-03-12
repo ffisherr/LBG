@@ -72,8 +72,12 @@ public class ChatFragment extends Fragment {
         messagesLayout = view.findViewById(R.id.all_messages_field);
 
         getAllMessages();
-        if (AllMessages != null && AllMessages[0] != null && AllMessages[0].getMessage_text()!=null) {
-            fillMessages(AllMessages);
+        try {
+            if (AllMessages != null && AllMessages[0] != null && AllMessages[0].getMessage_text() != null) {
+                fillMessages(AllMessages);
+            }
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            ex.printStackTrace();
         }
 
         View.OnClickListener sendBtnListener = new View.OnClickListener() {

@@ -1,6 +1,6 @@
 import sqlite3
 import json
-from model import User, Event, Message
+from model import User, Event, Message, University
 from db import insertIntoTable
 from flask import Flask, request
 from flask_restful import Resource, Api
@@ -139,7 +139,6 @@ class AddMessage(Resource):
 
 class GetMessages(Resource):
 	def post(self):
-		print(request.json)
 		conn = sqlite3.connect('lbg.db')
 		cursor = conn.cursor()
 
@@ -151,7 +150,21 @@ class GetMessages(Resource):
 			res.append(m.getFullInfo())
 			print(m.getFullInfo())
 		return jsonify(res)
+
+
+class GetUnivs(Resource):
+	def get(self):
+		conn = sqlite3.connect('lbg.db')
+		cursor = conn.cursor()
+
+		univs = cursor.execute('select * from universities')
 		
+		res = []
+		for univ in univs:
+			m = University(univ)
+			res.append(m.getFullInfo())
+			print(m.getFullInfo())
+		return jsonify(res)
 
 
 
@@ -161,6 +174,8 @@ api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
 api.add_resource(AddMessage,  '/add_message')
 api.add_resource(GetMessages, '/get_all_messages')
+api.add_resource(GetUnivs,    '/get_univers')
+
 
 
 if __name__ == '__main__':

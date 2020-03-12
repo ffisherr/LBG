@@ -33,4 +33,7 @@
     <string name="chat_tab">Чат</string>
 
     <string name="send_btn_text">Отправить</string>
+
+    <string name="createEvent_title">Создать событие</string>
+    <string name="exitFromApp_title">Выйти</string>
 </resources>

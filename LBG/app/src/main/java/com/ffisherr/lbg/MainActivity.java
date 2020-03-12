@@ -1,6 +1,7 @@
 package com.ffisherr.lbg;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -10,6 +11,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.tabs.TabLayout;
@@ -48,8 +51,16 @@ public class MainActivity extends AppCompatActivity implements Listener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-/*
-        sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        SectionPagerAdapter spa = new SectionPagerAdapter(getSupportFragmentManager());
+        ViewPager viewPager = findViewById(R.id.pager);
+        viewPager.setAdapter(spa);
+        TabLayout tabLayout = findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(viewPager);
+
+
+        /*sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(LOGIN_TEXT, "");
         ed.putString(ROLE_TEXT, "");
@@ -72,12 +83,34 @@ public class MainActivity extends AppCompatActivity implements Listener{
         if (isKnown.equals(false)) {
             Intent intent = new Intent(MainActivity.this, Dima.class);
             startActivity(intent);
-        } else {
-            SectionPagerAdapter spa = new SectionPagerAdapter(getSupportFragmentManager());
-            ViewPager viewPager = findViewById(R.id.pager);
-            viewPager.setAdapter(spa);
-            TabLayout tabLayout = findViewById(R.id.tabs);
-            tabLayout.setupWithViewPager(viewPager);
+        }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.createEvent_action:
+                Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
+                intent.putExtra("university", uUniversity);
+                startActivity(intent);
+                return true;
+            case R.id.exitFromApp_action:
+                sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+                SharedPreferences.Editor ed = sPref.edit();
+                ed.putString(LOGIN_TEXT, "");
+                ed.putString(ROLE_TEXT, "");
+                ed.putBoolean(IS_KNOWN_BOOL, false);
+                ed.commit();
+                Intent intent1 = new Intent(MainActivity.this, Dima.class);
+                startActivity(intent1);
+            default:
+                return super.onOptionsItemSelected(item);
         }
     }
 

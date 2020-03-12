@@ -32,6 +32,23 @@ class User():
 		return result
 
 
+class University():
+	def __init__(self, arg):
+		self.id, self.name = arg
+
+	def getFullInfo(self):
+		info = {'id': self.id, 
+				'name': self.name,
+				'status': 'success'}
+		return info
+
+	def addToDB(self):
+		result = []
+		result.append(self.id)
+		result.append(self.name)
+		return result
+
+
 class Message():
 	def __init__(self, arg):
 		self.id, self.dt, self.sender_id, self.message_text, self.sender_login = arg

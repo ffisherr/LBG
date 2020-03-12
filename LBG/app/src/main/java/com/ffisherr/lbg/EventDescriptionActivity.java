@@ -1,6 +1,8 @@
 package com.ffisherr.lbg;
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -17,6 +19,7 @@ public class EventDescriptionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_description);
+
         Intent intent = getIntent();
         String about = intent.getStringExtra(ABOUT_EXTRA);
         String title = intent.getStringExtra(TITLE_EXTRA);
@@ -35,5 +38,10 @@ public class EventDescriptionActivity extends AppCompatActivity {
 
         textView = findViewById(R.id.dt_text);
         textView.setText(dt);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
     }
 }
