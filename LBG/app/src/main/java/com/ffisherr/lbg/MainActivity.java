@@ -35,26 +35,37 @@ public class MainActivity extends AppCompatActivity implements Listener{
     private Integer uId;
     private Boolean isKnown;
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        checkLogIn();
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-
-        /*sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+/*
+        sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(LOGIN_TEXT, "");
         ed.putString(ROLE_TEXT, "");
         ed.putBoolean(IS_KNOWN_BOOL, false);
         ed.commit();*/
+        checkLogIn();
+    }
+
+    private void checkLogIn() {
 
         sPref   = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         uLogin  = sPref.getString(LOGIN_TEXT    , "");
         uRole   = sPref.getString(ROLE_TEXT     , "unknownUser");
         isKnown = sPref.getBoolean(IS_KNOWN_BOOL, false);
 
-        uUniversity   = sPref.getString(UNIVERSITY_TEXT, "");
+        uUniversity   = sPref.getString(UNIVERSITY_TEXT, "0");
         uUniversityId = sPref.getInt(UNIVERSITY_ID, 0);
         uId           = sPref.getInt(USER_ID, 0);
 

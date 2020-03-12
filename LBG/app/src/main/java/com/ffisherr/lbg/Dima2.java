@@ -42,6 +42,10 @@ public class Dima2 extends AppCompatActivity {
         TextView unSuccess = findViewById(R.id.attempts);
         try {
             result = ts.get();
+            if (result.equals("[{'status':'connectionError'}]")){
+                Toast.makeText(this, "Нет интернет соединения", Toast.LENGTH_LONG).show();
+                return;
+            }
             UserResponse ur = g.fromJson(result, UserResponse.class);
             if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                 unSuccess.setText("");

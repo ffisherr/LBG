@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,6 +39,7 @@ public class ChatFragment extends Fragment {
     private Integer uId;
 
     Message_Response[] AllMessages;
+    private int messCounter = 0;
 
 
     private static final int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -54,35 +56,24 @@ public class ChatFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         myInflater = inflater;
-        uIsKnown    = getArguments().getBoolean(Config.IS_KNOWN_BOOL);
-        uLogin      = getArguments().getString(Config.LOGIN_TEXT);
-        uUniversity = getArguments().getString(Config.UNIVERSITY_TEXT);
-        uId         = getArguments().getInt(Config.USER_ID);
+        try {
+            uIsKnown = getArguments().getBoolean(Config.IS_KNOWN_BOOL);
+            uLogin = getArguments().getString(Config.LOGIN_TEXT);
+            uUniversity = getArguments().getString(Config.UNIVERSITY_TEXT);
+            uId = getArguments().getInt(Config.USER_ID);
+        } catch (NullPointerException ex) {
+            uIsKnown = false;
+            uLogin = "";
+            uUniversity = "";
+            uId = -1;
+        }
         final View view = inflater.inflate(R.layout.fragment_chat, container, false);
         sendBtn = view.findViewById(R.id.send_message_button);
         messagesLayout = view.findViewById(R.id.all_messages_field);
 
         getAllMessages();
-        if (AllMessages != null) {
-            for (Message_Response m : AllMessages) {
-                LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(matchParent,
-                        wrapContent);
-
-                LinearLayout newMessageLayout = new LinearLayout(messagesLayout.getContext());
-                newMessageLayout.setOrientation(LinearLayout.VERTICAL);
-                messagesLayout.addView(newMessageLayout);
-
-                String myMessageText = m.getSender_id() + ": " + m.getMessage_text();
-                TextView newMessageText = new TextView(newMessageLayout.getContext());
-                newMessageText.setText(myMessageText);
-                newMessageText.setWidth(wrapContent);
-                newMessageLayout.addView(newMessageText);
-
-                TextView newMessageSender = new TextView(newMessageLayout.getContext());
-                newMessageSender.setText("--------------------");
-                newMessageSender.setWidth(wrapContent);
-                newMessageLayout.addView(newMessageSender);
-            }
+        if (AllMessages != null && AllMessages[0] != null && AllMessages[0].getMessage_text()!=null) {
+            fillMessages(AllMessages);
         }
 
         View.OnClickListener sendBtnListener = new View.OnClickListener() {
@@ -109,8 +100,8 @@ public class ChatFragment extends Fragment {
                 DateFormat myDf = new SimpleDateFormat("yyyy-MM-dd HH:mm");
                 Date dateObj = new Date();
                 String currDate = myDf.format(dateObj);
-                Message_Response newMessage = new Message_Response(-1, currDate,
-                        uId, newMessageEditText);
+                Message_Response newMessage = new Message_Response("error", -1, currDate,
+                        uId, newMessageEditText, uLogin);
                 message = null;
                 sendMessage(newMessage);
                 if (message != null) {
@@ -140,10 +131,55 @@ public class ChatFragment extends Fragment {
             }
         };
         sendBtn.setOnClickListener(sendBtnListener);
+        runTimer();
         return view;
     }
 
+    private void runTimer() {
+        final Handler handler = new Handler();
+        handler.post(new Runnable() {
+            @Override
+            public void run() {
+                getAllMessages();
+                int all_l = AllMessages.length;
+                if (messCounter < all_l) {
+                    Message_Response[] addedMessages = new Message_Response[all_l-messCounter];
+                    for (int i = 0; i < all_l-messCounter; i++) {
+                        addedMessages[i] = AllMessages[messCounter + i];
+                    }
+                    fillMessages(addedMessages);
+                }
+                handler.postDelayed(this, 4000);
+            }
+        });
+    }
+
+    private void fillMessages(Message_Response[] mass){
+        for (Message_Response m : mass) {
+            messCounter++;
+            System.out.println(m.getMessage_text());
+            LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(matchParent,
+                    wrapContent);
+
+            LinearLayout newMessageLayout = new LinearLayout(messagesLayout.getContext());
+            newMessageLayout.setOrientation(LinearLayout.VERTICAL);
+            messagesLayout.addView(newMessageLayout);
+
+            String myMessageText = m.getSender_login() + ": " + m.getMessage_text();
+            TextView newMessageText = new TextView(newMessageLayout.getContext());
+            newMessageText.setText(myMessageText);
+            newMessageText.setWidth(wrapContent);
+            newMessageLayout.addView(newMessageText);
+
+            TextView newMessageSender = new TextView(newMessageLayout.getContext());
+            newMessageSender.setText("--------------------");
+            newMessageSender.setWidth(wrapContent);
+            newMessageLayout.addView(newMessageSender);
+        }
+    }
+
     private void sendMessage(Message_Response mess) {
+        messCounter++;
         message = null;
 
         String result;
@@ -155,6 +191,10 @@ public class ChatFragment extends Fragment {
         ts.execute(url, event_data);
         try {
             result = ts.get();
+            if (result.equals("[{'status':'connectionError'}]")) {
+                Toast.makeText(myInflater.getContext(), "Нет связи с сервером", Toast.LENGTH_LONG).show();
+                return;
+            }
             try {
                 Message_Response getMess = g.fromJson(result, Message_Response.class);
                 if (getMess != null) {
@@ -175,21 +215,18 @@ public class ChatFragment extends Fragment {
     private void getAllMessages() {
         AllMessages = null;
         String result;
-        TaskGetServer ts = new TaskGetServer();
-        String url = ServerDescriptor.serverIpAdress + "/get_all_messages/1";
+        TaskPostServer ts = new TaskPostServer();
+        String url = ServerDescriptor.serverIpAdress + "/get_all_messages";
 
+        Message_Response mess = new Message_Response("",-1, "", 0,
+                "", "");
         Gson g = new Gson();
-        ts.execute(url);
+        String mess_data = g.toJson(mess);
+        ts.execute(url, mess_data);
         try {
             result = ts.get();
             try {
-                System.out.println(result);
-                Message_Response[] getMess = g.fromJson(result, Message_Response[].class);
-                if (getMess[0] != null) {
-                    if (getMess[0].getId() != 0) {
-                        AllMessages = getMess;
-                    }
-                }
+                AllMessages = g.fromJson(result, Message_Response[].class);
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
             }

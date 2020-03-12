@@ -35,10 +35,6 @@ def fillWithTestData(cursor):
 	insertIntoTable(cursor, 'universities', ['1', 'МГУ'])
 	insertIntoTable(cursor, 'universities', ['2', 'МЭИ'])
 
-	insertIntoTable(cursor, 'messages', ['0', 'TestText0', '2020-01-11 10:00', '1'])
-	insertIntoTable(cursor, 'messages', ['1', 'TestText1', '2020-01-11 10:01', '2'])
-	insertIntoTable(cursor, 'messages', ['2', 'TestText2', '2020-01-11 10:02', '0'])
-
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('0', 'Event 1', 
 		'2020-12-01 10:00', 'Test Event 1','{"tags":["student", "common"]}'))
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('1', 'Event 2', 
@@ -46,12 +42,17 @@ def fillWithTestData(cursor):
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('2', 'Event 3', 
 		'2020-12-01 10:00', 'Test Event 3','{"tags":["common"]}'))
 
+
 	insertIntoTable(cursor, 'users', [ '0', '0', '0', 'Андрей', 'Попов',
 	'Николаевич', 'andreiAdmin', '123'])
 	insertIntoTable(cursor, 'users', [ '1', '1', '1', 'Иван', 'Иванов',
 	'Иванович', 'ivanStudent', '123'])
 	insertIntoTable(cursor, 'users', [ '2', '1', '0', 'Петр', 'Петров',
 	'Петрович', 'petrStudent', '123'])
+"""
+	insertIntoTable(cursor, 'messages', ['0', 'TestText0', '2020-01-11 10:00', '1'])
+	insertIntoTable(cursor, 'messages', ['1', 'TestText1', '2020-01-11 10:01', '2'])
+	insertIntoTable(cursor, 'messages', ['2', 'TestText2', '2020-01-11 10:02', '0'])"""
 
 
 
@@ -72,7 +73,7 @@ def createTables(cursor):
 	createTable(cursor, 'calendar', 'id int NOT NULL UNIQUE, title text, dt datetime, \
 		about text, tags json1')
 	createTable(cursor, 'messages', 'id int NOT NULL UNIQUE, message_text text, dt datetime,\
-		sender_id int')
+		sender_id int, sender_login text')
 	createTable(cursor, 'universities', 'id int not NULL UNIQUE, name text')
 	fillWithTestData(cursor)
 

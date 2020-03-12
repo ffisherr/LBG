@@ -114,10 +114,14 @@ class AddMessage(Resource):
 		mId = cursor.execute('select max(id) from messages')
 		for MmId in mId:
 			pass 
-		mId = int(MmId[0]) + 1
+		if MmId[0] is not None:
+			mId = int(MmId[0]) + 1
+		else:
+			mId = 0
 
 		message_text = request.json['message_text']
 		sender_id = request.json['sender_id']
+		sender_login = request.json['sender_login']
 		dt = request.json['dt']
 
 		print(mId)
@@ -125,15 +129,17 @@ class AddMessage(Resource):
 		print(message_text)
 		print(dt)
 
-		m = Message([mId, dt, sender_id, message_text])
+		m = Message([mId, dt, sender_id, message_text, sender_login])
 		print(m)
 		insertIntoTable(cursor, 'messages', m.addToDB())
 		conn.commit()
+		print(m.getFullInfo())
 		return jsonify(m.getFullInfo())
 
 
 class GetMessages(Resource):
-	def get(self, start_mess_id):
+	def post(self):
+		print(request.json)
 		conn = sqlite3.connect('lbg.db')
 		cursor = conn.cursor()
 
@@ -154,7 +160,7 @@ api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
 api.add_resource(AddMessage,  '/add_message')
-api.add_resource(GetMessages, '/get_all_messages/<start_mess_id>')
+api.add_resource(GetMessages, '/get_all_messages')
 
 
 if __name__ == '__main__':

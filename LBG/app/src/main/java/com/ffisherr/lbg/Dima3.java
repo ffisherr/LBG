@@ -92,20 +92,16 @@ public class Dima3 extends AppCompatActivity {
 
             try {
                 result = ts.get();
+                if (result.equals("[{'status':'connectionError'}]")){
+                    Toast.makeText(this, "Нет интернет соединения", Toast.LENGTH_LONG).show();
+                    return;
+                }
                 UserResponse ur = g.fromJson(result, UserResponse.class);
                 System.out.println(result);
                 if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                     infText.setText("");
                     
                     Toast.makeText(this, "Вы зарегестрированы", Toast.LENGTH_LONG).show();
-                    /*SharedPreferences sPref = getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
-                    SharedPreferences.Editor ed = sPref.edit();
-                    ed.putString(Config.LOGIN_TEXT, ur.getLogin());
-                    ed.putInt(Config.ROLE_ID, ur.getRole_id());
-                    ed.putInt(Config.USER_ID, ur.getId());
-                    ed.putInt(Config.UNIVERSITY_ID, ur.getUniversity_id());
-                    ed.putBoolean(Config.IS_KNOWN_BOOL, true);
-                    ed.commit();*/
 
                     Intent mStartActivity = new Intent(Dima3.this, MainActivity.class);
                     int mPendingIntentId = 123456;

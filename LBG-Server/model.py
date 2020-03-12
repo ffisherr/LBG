@@ -34,14 +34,14 @@ class User():
 
 class Message():
 	def __init__(self, arg):
-		self.id, self.dt, self.sender_id, self.message_text = arg
-		print(self)
+		self.id, self.dt, self.sender_id, self.message_text, self.sender_login = arg
 
 	def getFullInfo(self):
 		info = {'id': self.id, 
 				'sender_id': self.sender_id,
 				'dt': str(self.dt),
 				'message_text': self.message_text,
+				'sender_login': self.sender_login,
 				'status': 'success'}
 		return info
 
@@ -51,6 +51,7 @@ class Message():
 		result.append(self.dt)
 		result.append(self.sender_id)
 		result.append(self.message_text)
+		result.append(self.sender_login)
 		return result
 
 class Event():
