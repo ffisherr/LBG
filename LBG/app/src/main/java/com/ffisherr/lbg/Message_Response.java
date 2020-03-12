@@ -3,10 +3,19 @@ package com.ffisherr.lbg;
 import java.util.Date;
 
 public class Message_Response {
+    private String status;
     private Integer id;
     private String dt;
     private Integer sender_id;
     private String message_text;
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Integer getId() {
         return id;

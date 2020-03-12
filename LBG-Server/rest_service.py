@@ -132,6 +132,21 @@ class AddMessage(Resource):
 		return jsonify(m.getFullInfo())
 
 
+class GetMessages(Resource):
+	def get(self, start_mess_id):
+		conn = sqlite3.connect('lbg.db')
+		cursor = conn.cursor()
+
+		messages = cursor.execute('select * from messages')
+		
+		res = []
+		for message in messages:
+			m = Message(message)
+			res.append(m.getFullInfo())
+			print(m.getFullInfo())
+		return jsonify(res)
+		
+
 
 
 api.add_resource(UserById,    '/users/<user_id>')
@@ -139,6 +154,7 @@ api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
 api.add_resource(AddMessage,  '/add_message')
+api.add_resource(GetMessages, '/get_all_messages/<start_mess_id>')
 
 
 if __name__ == '__main__':

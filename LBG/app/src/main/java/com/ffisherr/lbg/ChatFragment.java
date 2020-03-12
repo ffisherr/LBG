@@ -37,6 +37,8 @@ public class ChatFragment extends Fragment {
     private Boolean uIsKnown;
     private Integer uId;
 
+    Message_Response[] AllMessages;
+
 
     private static final int wrapContent = LinearLayout.LayoutParams.WRAP_CONTENT;
     private static final int matchParent = LinearLayout.LayoutParams.MATCH_PARENT;
@@ -60,6 +62,28 @@ public class ChatFragment extends Fragment {
         sendBtn = view.findViewById(R.id.send_message_button);
         messagesLayout = view.findViewById(R.id.all_messages_field);
 
+        getAllMessages();
+        if (AllMessages != null) {
+            for (Message_Response m : AllMessages) {
+                LinearLayout.LayoutParams lParams = new LinearLayout.LayoutParams(matchParent,
+                        wrapContent);
+
+                LinearLayout newMessageLayout = new LinearLayout(messagesLayout.getContext());
+                newMessageLayout.setOrientation(LinearLayout.VERTICAL);
+                messagesLayout.addView(newMessageLayout);
+
+                String myMessageText = m.getSender_id() + ": " + m.getMessage_text();
+                TextView newMessageText = new TextView(newMessageLayout.getContext());
+                newMessageText.setText(myMessageText);
+                newMessageText.setWidth(wrapContent);
+                newMessageLayout.addView(newMessageText);
+
+                TextView newMessageSender = new TextView(newMessageLayout.getContext());
+                newMessageSender.setText("--------------------");
+                newMessageSender.setWidth(wrapContent);
+                newMessageLayout.addView(newMessageSender);
+            }
+        }
 
         View.OnClickListener sendBtnListener = new View.OnClickListener() {
             @Override
@@ -98,14 +122,14 @@ public class ChatFragment extends Fragment {
                     newMessageLayout.setOrientation(LinearLayout.VERTICAL);
                     messagesLayout.addView(newMessageLayout);
 
-
+                    String myMessageText = getArguments().getString(LOGIN_TEXT) + ": " + message.getMessage_text();
                     TextView newMessageText = new TextView(newMessageLayout.getContext());
-                    newMessageText.setText(message.getMessage_text());
+                    newMessageText.setText(myMessageText);
                     newMessageText.setWidth(wrapContent);
                     newMessageLayout.addView(newMessageText);
 
                     TextView newMessageSender = new TextView(newMessageLayout.getContext());
-                    newMessageSender.setText(getArguments().getString(LOGIN_TEXT));
+                    newMessageSender.setText("--------------------");
                     newMessageSender.setWidth(wrapContent);
                     newMessageLayout.addView(newMessageSender);
 
@@ -147,4 +171,33 @@ public class ChatFragment extends Fragment {
             e.printStackTrace();
         }
     }
+
+    private void getAllMessages() {
+        AllMessages = null;
+        String result;
+        TaskGetServer ts = new TaskGetServer();
+        String url = ServerDescriptor.serverIpAdress + "/get_all_messages/1";
+
+        Gson g = new Gson();
+        ts.execute(url);
+        try {
+            result = ts.get();
+            try {
+                System.out.println(result);
+                Message_Response[] getMess = g.fromJson(result, Message_Response[].class);
+                if (getMess[0] != null) {
+                    if (getMess[0].getId() != 0) {
+                        AllMessages = getMess;
+                    }
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                e.printStackTrace();
+            }
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

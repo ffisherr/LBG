@@ -76,6 +76,9 @@ public class Dima3 extends AppCompatActivity {
             user.setPassw_hash(p1);
             user.setRole_id(1);
 
+            Spinner univerSpinner = findViewById(R.id.University);
+            user.setUniversity_id(univerSpinner.getSelectedItemPosition());
+
             editText = findViewById(R.id.edit_login);
             user.setLogin(editText.getText().toString());
 
@@ -90,16 +93,19 @@ public class Dima3 extends AppCompatActivity {
             try {
                 result = ts.get();
                 UserResponse ur = g.fromJson(result, UserResponse.class);
+                System.out.println(result);
                 if (ur.getStatus().equals(ServerDescriptor.SUCCESS)) {
                     infText.setText("");
                     
                     Toast.makeText(this, "Вы зарегестрированы", Toast.LENGTH_LONG).show();
-                    SharedPreferences sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
+                    /*SharedPreferences sPref = getSharedPreferences(Config.PREFERENCE_NAME, Context.MODE_PRIVATE);
                     SharedPreferences.Editor ed = sPref.edit();
-                    ed.putString(LOGIN_TEXT, ur.getLogin());
-                    ed.putString(ROLE_TEXT, ur.getRole_id().toString());
-                    ed.putBoolean(IS_KNOWN_BOOL, true);
-                    ed.commit();
+                    ed.putString(Config.LOGIN_TEXT, ur.getLogin());
+                    ed.putInt(Config.ROLE_ID, ur.getRole_id());
+                    ed.putInt(Config.USER_ID, ur.getId());
+                    ed.putInt(Config.UNIVERSITY_ID, ur.getUniversity_id());
+                    ed.putBoolean(Config.IS_KNOWN_BOOL, true);
+                    ed.commit();*/
 
                     Intent mStartActivity = new Intent(Dima3.this, MainActivity.class);
                     int mPendingIntentId = 123456;

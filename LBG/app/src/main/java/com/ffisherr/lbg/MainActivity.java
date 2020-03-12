@@ -41,6 +41,7 @@ public class MainActivity extends AppCompatActivity implements Listener{
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         /*sPref = getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sPref.edit();
         ed.putString(LOGIN_TEXT, "");

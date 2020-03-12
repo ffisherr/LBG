@@ -22,20 +22,6 @@ public class ChatActivity extends AppCompatActivity {
         setContentView(R.layout.activity_chat);
     }
 
-    public void onSendButtonClick(View view) {
-        //Это тестовые данные
-        //TODO вставить реальные данные
-        Message_Response newMessage = new Message_Response(0, "dateTime", 1,
-                "текст сообщения");
-        sendMessage(newMessage);
-        if (message != null) {
-            // TODO ообщение отправлено
-        } else {
-            // TODO пролемы отправки сообщения
-            Toast.makeText(this, "Ошибка отправки сообщения", Toast.LENGTH_LONG).show();
-        }
-    }
-
     private void displayAllMessages() {
         getAllMessages();
         if (AllMessages != null) {

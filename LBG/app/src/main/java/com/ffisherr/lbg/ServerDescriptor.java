@@ -13,7 +13,7 @@ public class ServerDescriptor {
 
     public static final MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-    public static final String serverIpAdress = "http://192.168.43.237:5002";
+    public static final String serverIpAdress = "http://192.168.43.145:5002"; //"http://192.168.43.237:5002";
     public static final String SUCCESS          = "success";
     public static final String INTERNET_ERROR   = "connectionError";
     public static final String LOGIN_ALREADY_EXISTS_ERROR = "loginError";

@@ -40,7 +40,7 @@ class Message():
 	def getFullInfo(self):
 		info = {'id': self.id, 
 				'sender_id': self.sender_id,
-				'dt': self.dt,
+				'dt': str(self.dt),
 				'message_text': self.message_text,
 				'status': 'success'}
 		return info
