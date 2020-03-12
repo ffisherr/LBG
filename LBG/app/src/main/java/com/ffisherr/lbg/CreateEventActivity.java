@@ -35,6 +35,7 @@ public class CreateEventActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(true);
         Intent intent = getIntent();
         uUniversity = intent.getStringExtra("university");
+        uLogin      = intent.getStringExtra("login");
     }
 
     public void onClickCreateEvent(View view){

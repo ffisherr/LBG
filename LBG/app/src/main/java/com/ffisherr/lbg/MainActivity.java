@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity implements Listener{
             case R.id.createEvent_action:
                 Intent intent = new Intent(MainActivity.this, CreateEventActivity.class);
                 intent.putExtra("university", uUniversity);
+                intent.putExtra("login", uLogin);
                 startActivity(intent);
                 return true;
             case R.id.exitFromApp_action:

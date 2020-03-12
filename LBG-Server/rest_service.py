@@ -61,15 +61,12 @@ class UserByLogin(Resource):
 		try:
 			conn = sqlite3.connect('lbg.db')
 			cursor = conn.cursor()
-			print(request.json)
 			passw_hash = request.json['passw_hash']
 			user_login = request.json['login']
 			user = cursor.execute('select * from users where login="%s" and passw_hash="%s"'
 				%(user_login, passw_hash))
 			for u in user:
-				print(u)
 				result = User(u)
-			print(result.getFullInfo())
 			return jsonify(result.getFullInfo())
 		except:
 			return {'status': 'error'}
@@ -88,7 +85,6 @@ class EventByTags(Resource):
 			for event in e:
 				ce = Event(event)
 				ce_tags = json.loads(ce.tags)["tags"]
-				print(ce_tags)
 				z = False
 				for tag in tags:
 					for ce_tag in ce_tags:
@@ -98,7 +94,6 @@ class EventByTags(Resource):
 							break
 					if z == True:
 						break
-			print(events)
 			return jsonify(events)
 		except:
 			return [{'status': 'error'}]
@@ -124,17 +119,43 @@ class AddMessage(Resource):
 		sender_login = request.json['sender_login']
 		dt = request.json['dt']
 
-		print(mId)
-		print(sender_id)
-		print(message_text)
-		print(dt)
-
 		m = Message([mId, dt, sender_id, message_text, sender_login])
-		print(m)
 		insertIntoTable(cursor, 'messages', m.addToDB())
 		conn.commit()
-		print(m.getFullInfo())
 		return jsonify(m.getFullInfo())
+
+
+class AddEvent(Resource):
+	def post(self):
+		print(request.json)
+		conn = sqlite3.connect('lbg.db')
+		cursor = conn.cursor()
+
+		mId = cursor.execute('select max(id) from calendar')
+		for MmId in mId:
+			pass 
+		if MmId[0] is not None:
+			mId = int(MmId[0]) + 1
+		else:
+			mId = 0
+
+		title = request.json['title']
+		dt = request.json['dt']
+		about = request.json['about']
+		tags = request.json['tags']
+
+		#m = Event([mId, title, dt, about, tags])
+		
+		s = ""
+		for tag in tags:
+			s += '"' + tag +'", '
+		s = s[:-2]
+		cursor.execute('insert into calendar values(?,?,?,?,?)', (str(mId), title, 
+		dt, about,'{"tags":[%s]}'%s))
+		#insertIntoTable(cursor, 'calendar', m.addToDB())
+		conn.commit()
+		#print(m.getFullInfo())
+		#return jsonify(m.getFullInfo())
 
 
 class GetMessages(Resource):
@@ -148,7 +169,6 @@ class GetMessages(Resource):
 		for message in messages:
 			m = Message(message)
 			res.append(m.getFullInfo())
-			print(m.getFullInfo())
 		return jsonify(res)
 
 
@@ -163,7 +183,6 @@ class GetUnivs(Resource):
 		for univ in univs:
 			m = University(univ)
 			res.append(m.getFullInfo())
-			print(m.getFullInfo())
 		return jsonify(res)
 
 
@@ -173,6 +192,7 @@ api.add_resource(UserByLogin, '/get_user_by_login')
 api.add_resource(UserAdd,     '/user_add')
 api.add_resource(EventByTags, '/get_event_by_tags')
 api.add_resource(AddMessage,  '/add_message')
+api.add_resource(AddEvent,    '/add_event')
 api.add_resource(GetMessages, '/get_all_messages')
 api.add_resource(GetUnivs,    '/get_univers')
 
