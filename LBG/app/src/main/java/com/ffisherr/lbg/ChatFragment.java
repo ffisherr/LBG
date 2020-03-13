@@ -153,7 +153,7 @@ public class ChatFragment extends Fragment {
                     }
                     fillMessages(addedMessages);
                 }
-                handler.postDelayed(this, 4000);
+                handler.postDelayed(this, 200);
             }
         });
     }
