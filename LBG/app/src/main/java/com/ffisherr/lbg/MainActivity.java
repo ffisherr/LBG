@@ -168,4 +168,9 @@ public class MainActivity extends AppCompatActivity implements Listener{
         intent.putExtra(EventDescriptionActivity.ID_EXTRA, id);
         startActivity(intent);
     }
+
+    public void onClickCrestici(View view){
+        Intent intent = new Intent(MainActivity.this, crestici.class);
+        startActivity(intent);
+    }
 }

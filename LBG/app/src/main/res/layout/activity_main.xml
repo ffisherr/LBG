@@ -29,4 +29,11 @@
         android:layout_height="match_parent"
         android:id="@+id/pager" />
 
+    <Button
+        android:id="@+id/crestici"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCrestici"
+        android:text="Крестики Нолики" />
+
 </LinearLayout>
