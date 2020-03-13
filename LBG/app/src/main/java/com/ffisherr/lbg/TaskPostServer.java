@@ -13,7 +13,7 @@ public class TaskPostServer extends AsyncTask<String, Void, String>{
         try {
             sResponse = serverDescriptor.doPostRequest(urls[0], urls[1]);
         } catch (IOException ex) {
-            sResponse = "{'status':'connectionError'}";
+            sResponse = "[{'status':'connectionError'}]";
         }
         System.out.println(sResponse);
         return sResponse;

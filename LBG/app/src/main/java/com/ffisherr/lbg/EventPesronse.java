@@ -1,11 +1,20 @@
 package com.ffisherr.lbg;
 
 public class EventPesronse {
+    private String status;
     private Integer id;
     private String title;
     private String about;
     private String [] tags;
     private String dt;//DateTime YYYY-MM-DD HH:MM
+
+    public EventPesronse(String [] tags) {
+        this.id = -1;
+        this.title = "";
+        this.about = "";
+        this.tags = tags;
+        this.dt = "";
+    }
 
     public EventPesronse(Integer id, String title, String about, String[] tags, String dt) {
         this.id = id;
@@ -13,6 +22,14 @@ public class EventPesronse {
         this.about = about;
         this.tags = tags;
         this.dt = dt;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public Integer getId() {

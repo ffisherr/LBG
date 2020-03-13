@@ -6,26 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity">
-
-    <Button
-        android:id="@+id/login"
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:onClick="onClickLogin"
-        android:text="Авторизация/Регистрация" />
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        >
 
-    <Button
-        android:id="@+id/chat"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="#5B007B" />
+        <!-- android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+         android:background="?attr/colorPrimary"-->
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/tabs" />
+    </com.google.android.material.appbar.AppBarLayout>
+    <androidx.viewpager.widget.ViewPager
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:onClick="onClickChat"
-        android:text="чат" />
-
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/smth_else"
-        android:onClick="onClickSmthElse" />
+        android:layout_height="match_parent"
+        android:id="@+id/pager" />
 
     <Button
         android:id="@+id/crestici"

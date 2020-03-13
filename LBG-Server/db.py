@@ -31,30 +31,50 @@ def fillWithTestData(cursor):
 	insertIntoTable(cursor, 'roles', ['1', 'student'])
 	insertIntoTable(cursor, 'roles', ['2', 'unknownUser'])
 
-	insertIntoTable(cursor, 'users', [ '0', 'admin', '123', '0'])
-	insertIntoTable(cursor, 'users', [ '1', 'student', '123', '1'])
-	insertIntoTable(cursor, 'users', [ '2', 'user', '123', '2'])
+	insertIntoTable(cursor, 'universities', ['0', 'МГТУ им. Н.Э.Баумана'])
+	insertIntoTable(cursor, 'universities', ['1', 'МГУ'])
+	insertIntoTable(cursor, 'universities', ['2', 'МЭИ'])
 
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('0', 'Event 1', 
-		'2020-12-01 10:00', 'Test Event 1','{"tags":["tag1", "tag2"]}'))
+		'2020-12-01 10:25', 'Test Event 1','{"tags":["student", "common"]}'))
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('1', 'Event 2', 
-		'2020-12-01 10:10', 'Test Event 2','{"tags":["tag3", "tag4"]}'))
+		'2020-12-01 10:10', 'Test Event 2','{"tags":["tag3", "common"]}'))
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('2', 'Event 3', 
-		'2020-12-01 10:00', 'Test Event 3','{"tags":["tag3"]}'))
+		'2020-10-01 10:00', 'Test Event 3','{"tags":["common"]}'))
+
+
+	insertIntoTable(cursor, 'users', [ '0', '0', '0', 'Андрей', 'Попов',
+	'Николаевич', 'andreiAdmin', '123'])
+	insertIntoTable(cursor, 'users', [ '1', '1', '1', 'Иван', 'Иванов',
+	'Иванович', 'ivanStudent', '123'])
+	insertIntoTable(cursor, 'users', [ '2', '1', '0', 'Петр', 'Петров',
+	'Петрович', 'petrStudent', '123'])
+"""
+	insertIntoTable(cursor, 'messages', ['0', 'TestText0', '2020-01-11 10:00', '1'])
+	insertIntoTable(cursor, 'messages', ['1', 'TestText1', '2020-01-11 10:01', '2'])
+	insertIntoTable(cursor, 'messages', ['2', 'TestText2', '2020-01-11 10:02', '0'])"""
+
+
 
 
 def dropTables(cursor):
 	dropTable(cursor, 'users')
 	dropTable(cursor, 'roles')
 	dropTable(cursor, 'calendar')
+	dropTable(cursor, 'messages')
+	dropTable(cursor, 'universities')
 
 
 def createTables(cursor):
-	createTable(cursor, 'users', 'id int NOT NULL UNIQUE, login text NOT NULL UNIQUE,\
-		passw_hash text, role_id int')
+	createTable(cursor, 'users', 'id int NOT NULL UNIQUE, role_id int, university_id int,\
+		FirstName text, SurName text, SecondName text,login text NOT NULL UNIQUE,\
+		passw_hash text')
 	createTable(cursor, 'roles', 'id int NOT NULL UNIQUE, role text')
 	createTable(cursor, 'calendar', 'id int NOT NULL UNIQUE, title text, dt datetime, \
 		about text, tags json1')
+	createTable(cursor, 'messages', 'id int NOT NULL UNIQUE, message_text text, dt datetime,\
+		sender_id int, sender_login text')
+	createTable(cursor, 'universities', 'id int not NULL UNIQUE, name text')
 	fillWithTestData(cursor)
 
 

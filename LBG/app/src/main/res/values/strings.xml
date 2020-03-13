@@ -28,5 +28,13 @@
 
     <!-- Вход начало -->
     <string name="attemptsNumber_text">Попыток:</string>
-    <!-- Вход конец -->
+
+    <string name="calendar_tab">События</string>
+    <string name="chat_tab">Чат</string>
+
+    <string name="send_btn_text">Отправить</string>
+
+    <string name="createEvent_title">Создать событие</string>
+    <string name="exitFromApp_title">Выйти</string>
+    <string name="crestiki_title">Крестики-нолики</string>
 </resources>
