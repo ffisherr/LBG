@@ -11,10 +11,12 @@
         android:layout_height="wrap_content"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         >
+
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"/>
+            android:layout_height="?attr/actionBarSize"
+            android:background="#5B007B" />
         <!-- android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
          android:background="?attr/colorPrimary"-->
         <com.google.android.material.tabs.TabLayout
@@ -26,5 +28,12 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/pager" />
+
+    <Button
+        android:id="@+id/crestici"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="onClickCrestici"
+        android:text="Крестики Нолики" />
 
 </LinearLayout>

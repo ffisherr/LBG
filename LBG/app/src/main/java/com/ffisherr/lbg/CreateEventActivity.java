@@ -81,15 +81,23 @@ public class CreateEventActivity extends AppCompatActivity {
                     if (getEvent.getId() != 0) {
                         event = getEvent;
                         Toast.makeText(this, "Событие успешно создано", Toast.LENGTH_LONG).show();
+                        finish();
                     }
+                    Toast.makeText(this, "Событие успешно создано", Toast.LENGTH_LONG).show();
+                    finish();
                 }
+                Toast.makeText(this, "Событие успешно создано", Toast.LENGTH_LONG).show();
+                finish();
             } catch (ArrayIndexOutOfBoundsException e) {
                 e.printStackTrace();
+                Toast.makeText(this, "Ошибка 1", Toast.LENGTH_LONG).show();
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Ошибка 2", Toast.LENGTH_LONG).show();
         } catch (ExecutionException e) {
             e.printStackTrace();
+            Toast.makeText(this, "Ошибка 3", Toast.LENGTH_LONG).show();
         }
 
     }

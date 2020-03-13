@@ -6,9 +6,14 @@
         android:icon="@drawable/ic_add_white"
         android:orderInCategory="1"
         app:showAsAction="ifRoom"/>
+    <item android:id="@+id/open_crestiki"
+        android:title="@string/crestiki_title"
+        android:icon="@drawable/baseline_highlight_off_white_18dp"
+        android:orderInCategory="2"
+        app:showAsAction="ifRoom" />
     <item android:id="@+id/exitFromApp_action"
         android:title="@string/exitFromApp_title"
         android:icon="@drawable/baseline_exit_to_app_white_18dp"
-        android:orderInCategory="2"
+        android:orderInCategory="3"
         app:showAsAction="ifRoom" />
 </menu>

@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity implements Listener{
                 ed.commit();
                 Intent intent1 = new Intent(MainActivity.this, Dima.class);
                 startActivity(intent1);
+                return true;
+            case R.id.open_crestiki:
+                Intent intent2 = new Intent(MainActivity.this, crestici.class);
+                startActivity(intent2);
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
@@ -163,6 +168,11 @@ public class MainActivity extends AppCompatActivity implements Listener{
         intent.putExtra(EventDescriptionActivity.TITLE_EXTRA, title);
         intent.putExtra(EventDescriptionActivity.DT_EXTRA, dt);
         intent.putExtra(EventDescriptionActivity.ID_EXTRA, id);
+        startActivity(intent);
+    }
+
+    public void onClickCrestici(View view){
+        Intent intent = new Intent(MainActivity.this, crestici.class);
         startActivity(intent);
     }
 }
