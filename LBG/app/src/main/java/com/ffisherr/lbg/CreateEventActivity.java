@@ -7,7 +7,9 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -59,7 +61,21 @@ public class CreateEventActivity extends AppCompatActivity {
             Toast.makeText(this, "Неверный формат", Toast.LENGTH_LONG).show();
             return;
         };
-        String[] tags = {Config.common_tag, uLogin, uUniversity};
+
+        String[] tags = {Config.common_tag};
+        RadioButton who = findViewById(R.id.only_me_can_see);
+        if (who.isChecked()) {
+            tags[0] = uLogin;
+        }
+        who = findViewById(R.id.erybody_can_see);
+        if (who.isChecked()) {
+            tags[0] = Config.common_tag;
+        }
+        who = findViewById(R.id.univer_can_see);
+        if (who.isChecked()) {
+            tags[0] = uUniversity;
+        }
+
         EventPesronse event = new EventPesronse(-1, title, about, tags, strDate);
 
         String result;

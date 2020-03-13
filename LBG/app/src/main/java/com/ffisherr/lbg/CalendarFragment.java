@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.concurrent.ExecutionException;
+import java.util.zip.Inflater;
 
 
 public class CalendarFragment extends ListFragment {
@@ -26,6 +27,7 @@ public class CalendarFragment extends ListFragment {
     private String uUniversity;
     private Boolean uIsKnown;
     private Listener listener;
+    private LayoutInflater myInflater;
 
     public CalendarFragment() {
         // Required empty public constructor
@@ -45,6 +47,7 @@ public class CalendarFragment extends ListFragment {
         uIsKnown    = getArguments().getBoolean(Config.IS_KNOWN_BOOL);
         uLogin      = getArguments().getString(Config.LOGIN_TEXT);
         uUniversity = getArguments().getString(Config.UNIVERSITY_TEXT);
+        myInflater = inflater;
         String[] tags = {Config.common_tag, uLogin, uUniversity};
         getEvents(tags);
         EventArrayAdapter arr;
@@ -57,6 +60,22 @@ public class CalendarFragment extends ListFragment {
         }
         setListAdapter(arr);
         return super.onCreateView(inflater, container, savedInstanceState);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        String[] tags = {Config.common_tag, uLogin, uUniversity};
+        getEvents(tags);
+        EventArrayAdapter arr;
+        if (allEvents != null) {
+            arr = new EventArrayAdapter(myInflater.getContext(), allEvents);
+        } else {
+            EventPesronse[] er = {};
+            Toast.makeText(myInflater.getContext(), "Нет доступных мероприятий", Toast.LENGTH_LONG).show();
+            arr = new EventArrayAdapter(myInflater.getContext(), er);
+        }
+        setListAdapter(arr);
     }
 
     @Override
