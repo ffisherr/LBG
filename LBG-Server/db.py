@@ -36,11 +36,11 @@ def fillWithTestData(cursor):
 	insertIntoTable(cursor, 'universities', ['2', 'МЭИ'])
 
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('0', 'Event 1', 
-		'2020-12-01 10:00', 'Test Event 1','{"tags":["student", "common"]}'))
+		'2020-12-01 10:25', 'Test Event 1','{"tags":["student", "common"]}'))
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('1', 'Event 2', 
 		'2020-12-01 10:10', 'Test Event 2','{"tags":["tag3", "common"]}'))
 	cursor.execute('insert into calendar values(?,?,?,?,?)', ('2', 'Event 3', 
-		'2020-12-01 10:00', 'Test Event 3','{"tags":["common"]}'))
+		'2020-10-01 10:00', 'Test Event 3','{"tags":["common"]}'))
 
 
 	insertIntoTable(cursor, 'users', [ '0', '0', '0', 'Андрей', 'Попов',

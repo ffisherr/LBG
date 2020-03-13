@@ -110,6 +110,9 @@ public class MainActivity extends AppCompatActivity implements Listener{
                 ed.commit();
                 Intent intent1 = new Intent(MainActivity.this, Dima.class);
                 startActivity(intent1);
+                return true;
+            case R.id.open_crestiki:
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }

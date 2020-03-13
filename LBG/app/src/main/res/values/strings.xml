@@ -36,4 +36,5 @@
 
     <string name="createEvent_title">Создать событие</string>
     <string name="exitFromApp_title">Выйти</string>
+    <string name="crestiki_title">Крестики-нолики</string>
 </resources>

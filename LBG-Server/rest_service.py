@@ -81,7 +81,7 @@ class EventByTags(Resource):
 			cursor = conn.cursor()
 			tags = request.json['tags']
 			events = []
-			e = cursor.execute('select * from calendar')
+			e = cursor.execute('select * from calendar order by dt asc')
 			for event in e:
 				ce = Event(event)
 				ce_tags = json.loads(ce.tags)["tags"]
